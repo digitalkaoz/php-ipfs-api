@@ -1,0 +1,33 @@
+
+{
+    "alias": "php-ipfs.phar",
+    "chmod": "0755",
+    "compactors": [
+        "Herrera\\Box\\Compactor\\Php"
+    ],
+    "directories": [
+        "src"
+    ],
+    "directories-bin": [
+        "src/Api",
+        "src/Annotation"
+    ],
+    "extract": true,
+    "files": [
+        "LICENSE"
+    ],
+    "finder": [
+        {
+            "name": "*.php",
+            "exclude": [
+                "tests", "Tests"
+            ],
+            "in": "vendor"
+        }
+    ],
+    "git-commit": "git-commit",
+    "git-version": "git-version",
+    "main": "bin/php-ipfs",
+    "output": "php-ipfs.phar",
+    "stub": true
+}

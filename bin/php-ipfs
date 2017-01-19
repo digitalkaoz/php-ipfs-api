@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+
+$loader = require __DIR__.'/../vendor/autoload.php';
+
+use Doctrine\Common\Annotations\AnnotationRegistry;
+use IPFS\Container\ServiceProvider;
+use Pimple\Container;
+use Symfony\Component\Console\Application;
+
+AnnotationRegistry::registerLoader(array($loader, "loadClass"));
+
+function run()
+{
+    $container = new Container();
+    $container->register(new ServiceProvider());
+    $container[Application::class]->run();
+}
+
+run();

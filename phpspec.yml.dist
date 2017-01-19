@@ -1,0 +1,5 @@
+suites:
+    default:
+        namespace: IPFS
+        psr4_prefix: IPFS
+        spec_path: tests

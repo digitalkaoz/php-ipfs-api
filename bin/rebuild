@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+composer rebuild-api
+
+git ls-files -m
+
+set +o pipefail
+git ls-files -m | wc -l; exit "${PIPESTATUS[0]}"
+

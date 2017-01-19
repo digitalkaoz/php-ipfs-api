@@ -1,0 +1,17 @@
+suites:
+    default:
+        namespace: IPFS
+        psr4_prefix: IPFS
+        spec_path: tests
+
+extensions:
+    PhpSpecCodeCoverage\CodeCoverageExtension:
+      whitelist: [src]
+      format:
+        - text
+        - clover
+        - html
+
+      output:
+        clover: coverage.xml
+        html: coverage
