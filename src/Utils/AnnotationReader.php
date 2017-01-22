@@ -44,11 +44,6 @@ class AnnotationReader
         $this->docBlockFactory = $docBlockFactory;
     }
 
-    public function isPrimary($method): bool
-    {
-        return $this->getApi($method)->primary;
-    }
-
     public function isApi($method): bool
     {
         return (bool) $this->getApi($method);
@@ -61,15 +56,7 @@ class AnnotationReader
 
     public function getName($method): string
     {
-        $reflection = $this->getMethod($method);
-
-        $prefix = null;
-
-        if (!$this->isPrimary($method) && !$this->getApi($method)->name) {
-            $prefix = $reflection->getDeclaringClass()->getShortName() . ':';
-        }
-
-        return $prefix . ($this->getApi($method)->name ?: CaseFormatter::camelToColon($reflection->name));
+        return (string) $this->getApi($method)->name;
     }
 
     /**
@@ -93,7 +80,10 @@ class AnnotationReader
         return $parameters;
     }
 
-    public function getApi($method): Api
+    /**
+     * @return Api|null
+     */
+    private function getApi($method)
     {
         return $this->reader->getMethodAnnotation(
             $this->getMethod($method),
@@ -101,7 +91,7 @@ class AnnotationReader
         );
     }
 
-    public function getMethod($method): \ReflectionMethod
+    private function getMethod($method): \ReflectionMethod
     {
         if ($method instanceof \ReflectionMethod) {
             return $method;

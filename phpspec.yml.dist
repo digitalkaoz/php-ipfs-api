@@ -3,3 +3,5 @@ suites:
         namespace: IPFS
         psr4_prefix: IPFS
         spec_path: tests
+
+bootstrap: tests/spec/bootstrap.php

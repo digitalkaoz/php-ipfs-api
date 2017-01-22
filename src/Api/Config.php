@@ -35,7 +35,7 @@ final class Config implements Api
     /**
      * Opens the config file for editing in $EDITOR.
      *
-     * @Endpoint(primary=false, name="config:edit")
+     * @Endpoint(name="config:edit")
      *
      * @return Command
      */
@@ -47,7 +47,7 @@ final class Config implements Api
     /**
      * Replaces the config with .
      *
-     * @Endpoint(primary=false, name="config:replace")
+     * @Endpoint(name="config:replace")
      *
      * @param string $file the file to use as the new config
      *
@@ -61,7 +61,7 @@ final class Config implements Api
     /**
      * Outputs the content of the config file.
      *
-     * @Endpoint(primary=false, name="config:show")
+     * @Endpoint(name="config:show")
      *
      * @return Command
      */

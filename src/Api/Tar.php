@@ -35,7 +35,7 @@ final class Tar implements Api
     /**
      * Import a tar file into ipfs.
      *
-     * @Endpoint(primary=false, name="tar:add")
+     * @Endpoint(name="tar:add")
      *
      * @param string $file tar file to add
      *
@@ -49,7 +49,7 @@ final class Tar implements Api
     /**
      * Export a tar file from IPFS.
      *
-     * @Endpoint(primary=false, name="tar:cat")
+     * @Endpoint(name="tar:cat")
      *
      * @param string $arg iPFS path of archive to export
      *

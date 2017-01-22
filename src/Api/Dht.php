@@ -35,7 +35,7 @@ final class Dht implements Api
     /**
      * Query the DHT for all of the multiaddresses associated with a Peer ID.
      *
-     * @Endpoint(primary=false, name="dht:findpeer")
+     * @Endpoint(name="dht:findpeer")
      *
      * @param string $arg     the ID of the peer to search for
      * @param bool   $verbose print extra information
@@ -50,7 +50,7 @@ final class Dht implements Api
     /**
      * Find peers in the DHT that can provide a specific value, given a key.
      *
-     * @Endpoint(primary=false, name="dht:findprovs")
+     * @Endpoint(name="dht:findprovs")
      *
      * @param string $arg     the key to find providers for
      * @param bool   $verbose print extra information
@@ -65,7 +65,7 @@ final class Dht implements Api
     /**
      * Given a key, query the DHT for its best value.
      *
-     * @Endpoint(primary=false, name="dht:get")
+     * @Endpoint(name="dht:get")
      *
      * @param string $arg     the key to find a value for
      * @param bool   $verbose print extra information
@@ -80,7 +80,7 @@ final class Dht implements Api
     /**
      * Write a key/value pair to the DHT.
      *
-     * @Endpoint(primary=false, name="dht:put")
+     * @Endpoint(name="dht:put")
      *
      * @param string $arg     the key to store the value at
      * @param string $arg1    the value to store
@@ -96,7 +96,7 @@ final class Dht implements Api
     /**
      * Find the closest Peer IDs to a given Peer ID by querying the DHT.
      *
-     * @Endpoint(primary=false, name="dht:query")
+     * @Endpoint(name="dht:query")
      *
      * @param string $arg     the peerID to run the query against
      * @param bool   $verbose print extra information

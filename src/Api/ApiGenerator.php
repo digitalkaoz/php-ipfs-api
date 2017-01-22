@@ -125,7 +125,6 @@ EOS
     private function buildDocBlock(array $methodConfig): string
     {
         $params = count($methodConfig['arguments']) ? '' : '*';
-        $primary = strpos($methodConfig['parts'], ':') === false ? 'true' : 'false';
 
         foreach ($methodConfig['arguments'] as $index => $argument) {
             $suffix = $index + 1 === count($methodConfig['arguments']) ? "\n*" : "\n";
@@ -136,7 +135,7 @@ EOS
 /**
  * {$methodConfig['description']}
  *
- * @Endpoint(primary={$primary}, name="{$methodConfig['parts']}")
+ * @Endpoint(name="{$methodConfig['parts']}")
  *
  {$params}
  * @return Command

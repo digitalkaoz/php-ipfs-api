@@ -35,7 +35,7 @@ final class Block implements Api
     /**
      * Get a raw IPFS block.
      *
-     * @Endpoint(primary=false, name="block:get")
+     * @Endpoint(name="block:get")
      *
      * @param string $arg the base58 multihash of an existing block to get
      *
@@ -49,7 +49,7 @@ final class Block implements Api
     /**
      * Stores input as an IPFS block.
      *
-     * @Endpoint(primary=false, name="block:put")
+     * @Endpoint(name="block:put")
      *
      * @param string $file the data to be stored as an IPFS block
      *
@@ -63,7 +63,7 @@ final class Block implements Api
     /**
      * Print information of a raw IPFS block.
      *
-     * @Endpoint(primary=false, name="block:stat")
+     * @Endpoint(name="block:stat")
      *
      * @param string $arg the base58 multihash of an existing block to stat
      *

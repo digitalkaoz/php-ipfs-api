@@ -35,7 +35,7 @@ final class Bootstrap implements Api
     /**
      * Add default peers to the bootstrap list.
      *
-     * @Endpoint(primary=false, name="bootstrap:add:default")
+     * @Endpoint(name="bootstrap:add:default")
      *
      * @return Command
      */
@@ -47,7 +47,7 @@ final class Bootstrap implements Api
     /**
      * Show peers in the bootstrap list.
      *
-     * @Endpoint(primary=false, name="bootstrap:list")
+     * @Endpoint(name="bootstrap:list")
      *
      * @return Command
      */
@@ -59,7 +59,7 @@ final class Bootstrap implements Api
     /**
      * Removes all peers from the bootstrap list.
      *
-     * @Endpoint(primary=false, name="bootstrap:rm:all")
+     * @Endpoint(name="bootstrap:rm:all")
      *
      * @return Command
      */

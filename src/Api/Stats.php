@@ -35,7 +35,7 @@ final class Stats implements Api
     /**
      * Show some diagnostic information on the bitswap agent.
      *
-     * @Endpoint(primary=false, name="stats:bitswap")
+     * @Endpoint(name="stats:bitswap")
      *
      * @return Command
      */
@@ -47,7 +47,7 @@ final class Stats implements Api
     /**
      * Print ipfs bandwidth information.
      *
-     * @Endpoint(primary=false, name="stats:bw")
+     * @Endpoint(name="stats:bw")
      *
      * @param string $peer     specify a peer to print bandwidth for
      * @param string $proto    specify a protocol to print bandwidth for
@@ -64,7 +64,7 @@ final class Stats implements Api
     /**
      * Get stats for the currently used repo.
      *
-     * @Endpoint(primary=false, name="stats:repo")
+     * @Endpoint(name="stats:repo")
      *
      * @param bool $human output RepoSize in MiB
      *

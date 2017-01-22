@@ -40,6 +40,11 @@
             "IPFS\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\IPFS\\": "tests/spec"
+        }
+    },
 
     "scripts" : {
         "test": "vendor/bin/phpspec run -f pretty --ansi -vv $@",

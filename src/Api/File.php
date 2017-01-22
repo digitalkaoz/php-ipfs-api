@@ -35,7 +35,7 @@ final class File implements Api
     /**
      * List directory contents for Unix filesystem objects.
      *
-     * @Endpoint(primary=false, name="file:ls")
+     * @Endpoint(name="file:ls")
      *
      * @param string $arg the path to the IPFS object(s) to list links from
      *

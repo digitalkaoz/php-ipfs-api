@@ -35,7 +35,7 @@ final class Name implements Api
     /**
      * Publish an object to IPNS.
      *
-     * @Endpoint(primary=false, name="name:publish")
+     * @Endpoint(name="name:publish")
      *
      * @param string $arg      iPFS path of the object to be published
      * @param bool   $resolve  resolve given path before publishing
@@ -52,7 +52,7 @@ final class Name implements Api
     /**
      * Gets the value currently published at an IPNS name.
      *
-     * @Endpoint(primary=false, name="name:resolve")
+     * @Endpoint(name="name:resolve")
      *
      * @param string $arg       the IPNS name to resolve
      * @param bool   $recursive resolve until the result is not an IPNS name

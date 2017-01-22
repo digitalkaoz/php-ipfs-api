@@ -35,7 +35,7 @@ final class Pin implements Api
     /**
      * Pins objects to local storage.
      *
-     * @Endpoint(primary=false, name="pin:add")
+     * @Endpoint(name="pin:add")
      *
      * @param string $arg       path to object(s) to be pinned
      * @param bool   $recursive recursively pin the object linked to by the specified object(s)
@@ -50,7 +50,7 @@ final class Pin implements Api
     /**
      * List objects pinned to local storage.
      *
-     * @Endpoint(primary=false, name="pin:ls")
+     * @Endpoint(name="pin:ls")
      *
      * @param string $arg   path to object(s) to be listed
      * @param string $type  the type of pinned keys to list
@@ -66,7 +66,7 @@ final class Pin implements Api
     /**
      * Removes the pinned object from local storage.
      *
-     * @Endpoint(primary=false, name="pin:rm")
+     * @Endpoint(name="pin:rm")
      *
      * @param string $arg       path to object(s) to be unpinned
      * @param bool   $recursive recursively unpin the object linked to by the specified object(s)

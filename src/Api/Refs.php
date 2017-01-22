@@ -35,7 +35,7 @@ final class Refs implements Api
     /**
      * Lists all local references.
      *
-     * @Endpoint(primary=false, name="refs:local")
+     * @Endpoint(name="refs:local")
      *
      * @return Command
      */

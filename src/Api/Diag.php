@@ -35,7 +35,7 @@ final class Diag implements Api
     /**
      * Clear inactive requests from the log.
      *
-     * @Endpoint(primary=false, name="diag:cmds:clear")
+     * @Endpoint(name="diag:cmds:clear")
      *
      * @return Command
      */
@@ -47,7 +47,7 @@ final class Diag implements Api
     /**
      * Set how long to keep inactive requests in the log.
      *
-     * @Endpoint(primary=false, name="diag:cmds:set-time")
+     * @Endpoint(name="diag:cmds:set-time")
      *
      * @param string $arg time to keep inactive requests in log
      *
@@ -61,7 +61,7 @@ final class Diag implements Api
     /**
      * Generates a network diagnostics report.
      *
-     * @Endpoint(primary=false, name="diag:net")
+     * @Endpoint(name="diag:net")
      *
      * @param string $vis output format
      *
@@ -75,7 +75,7 @@ final class Diag implements Api
     /**
      * Prints out system diagnostic information.
      *
-     * @Endpoint(primary=false, name="diag:sys")
+     * @Endpoint(name="diag:sys")
      *
      * @return Command
      */

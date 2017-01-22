@@ -35,7 +35,7 @@ final class Repo implements Api
     /**
      * Removes repo lockfiles.
      *
-     * @Endpoint(primary=false, name="repo:fsck")
+     * @Endpoint(name="repo:fsck")
      *
      * @return Command
      */
@@ -47,7 +47,7 @@ final class Repo implements Api
     /**
      * Perform a garbage collection sweep on the repo.
      *
-     * @Endpoint(primary=false, name="repo:gc")
+     * @Endpoint(name="repo:gc")
      *
      * @param bool $quiet write minimal output
      *
@@ -61,7 +61,7 @@ final class Repo implements Api
     /**
      * Get stats for the currently used repo.
      *
-     * @Endpoint(primary=false, name="repo:stat")
+     * @Endpoint(name="repo:stat")
      *
      * @param bool $human output RepoSize in MiB
      *
@@ -75,7 +75,7 @@ final class Repo implements Api
     /**
      * Verify all blocks in repo are not corrupted.
      *
-     * @Endpoint(primary=false, name="repo:verify")
+     * @Endpoint(name="repo:verify")
      *
      * @return Command
      */
@@ -87,7 +87,7 @@ final class Repo implements Api
     /**
      * Show the repo version.
      *
-     * @Endpoint(primary=false, name="repo:version")
+     * @Endpoint(name="repo:version")
      *
      * @param bool $quiet write minimal output
      *

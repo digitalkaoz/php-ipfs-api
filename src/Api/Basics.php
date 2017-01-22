@@ -35,7 +35,7 @@ final class Basics implements Api
     /**
      * Add a file to ipfs.
      *
-     * @Endpoint(primary=true, name="add")
+     * @Endpoint(name="add")
      *
      * @param string $file              the path to a file to be added to IPFS
      * @param bool   $recursive         add directory paths recursively
@@ -59,7 +59,7 @@ final class Basics implements Api
     /**
      * Show IPFS object data.
      *
-     * @Endpoint(primary=true, name="cat")
+     * @Endpoint(name="cat")
      *
      * @param string $arg the path to the IPFS object(s) to be outputted
      *
@@ -73,7 +73,7 @@ final class Basics implements Api
     /**
      * List all available commands.
      *
-     * @Endpoint(primary=true, name="commands")
+     * @Endpoint(name="commands")
      *
      * @param bool $flags show command flags
      *
@@ -87,7 +87,7 @@ final class Basics implements Api
     /**
      * DNS link resolver.
      *
-     * @Endpoint(primary=true, name="dns")
+     * @Endpoint(name="dns")
      *
      * @param string $arg       the domain-name name to resolve
      * @param bool   $recursive resolve until the result is not a DNS link
@@ -102,7 +102,7 @@ final class Basics implements Api
     /**
      * Download IPFS objects.
      *
-     * @Endpoint(primary=true, name="get")
+     * @Endpoint(name="get")
      *
      * @param string $arg              the path to the IPFS object(s) to be outputted
      * @param string $output           the path where the output should be stored
@@ -120,7 +120,7 @@ final class Basics implements Api
     /**
      * Show IPFS Node ID info.
      *
-     * @Endpoint(primary=true, name="id")
+     * @Endpoint(name="id")
      *
      * @param string $arg    peer
      * @param string $format optional output format
@@ -135,7 +135,7 @@ final class Basics implements Api
     /**
      * List links from an object.
      *
-     * @Endpoint(primary=true, name="ls")
+     * @Endpoint(name="ls")
      *
      * @param string $arg         the path to the IPFS object(s) to list links from
      * @param bool   $headers     print table headers (Hash, Size, Name)
@@ -151,7 +151,7 @@ final class Basics implements Api
     /**
      * Mounts IPFS to the filesystem (read-only).
      *
-     * @Endpoint(primary=true, name="mount")
+     * @Endpoint(name="mount")
      *
      * @param string $ipfsPath the path where IPFS should be mounted
      * @param string $ipnsPath the path where IPNS should be mounted
@@ -166,7 +166,7 @@ final class Basics implements Api
     /**
      * Send echo request packets to IPFS hosts.
      *
-     * @Endpoint(primary=true, name="ping")
+     * @Endpoint(name="ping")
      *
      * @param string $arg   iD of peer to be pinged
      * @param int    $count number of ping messages to send
@@ -181,7 +181,7 @@ final class Basics implements Api
     /**
      * Resolve the value of names to IPFS.
      *
-     * @Endpoint(primary=true, name="resolve")
+     * @Endpoint(name="resolve")
      *
      * @param string $arg       the name to resolve
      * @param bool   $recursive resolve until the result is an IPFS name
@@ -194,7 +194,7 @@ final class Basics implements Api
     }
 
     /**
-     * @Endpoint(primary=true, name="update")
+     * @Endpoint(name="update")
      *
      * @param string $arg arguments for subcommand
      *
@@ -208,7 +208,7 @@ final class Basics implements Api
     /**
      * Shows ipfs version information.
      *
-     * @Endpoint(primary=true, name="version")
+     * @Endpoint(name="version")
      *
      * @param bool $number only show the version number
      * @param bool $commit show the commit hash

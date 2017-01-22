@@ -35,7 +35,7 @@ final class Bitswap implements Api
     /**
      * Show some diagnostic information on the bitswap agent.
      *
-     * @Endpoint(primary=false, name="bitswap:stat")
+     * @Endpoint(name="bitswap:stat")
      *
      * @return Command
      */
@@ -47,7 +47,7 @@ final class Bitswap implements Api
     /**
      * Remove a given block from your wantlist.
      *
-     * @Endpoint(primary=false, name="bitswap:unwant")
+     * @Endpoint(name="bitswap:unwant")
      *
      * @param string $arg key(s) to remove from your wantlist
      *
@@ -61,7 +61,7 @@ final class Bitswap implements Api
     /**
      * Show blocks currently on the wantlist.
      *
-     * @Endpoint(primary=false, name="bitswap:wantlist")
+     * @Endpoint(name="bitswap:wantlist")
      *
      * @param string $peer specify which peer to show wantlist for
      *

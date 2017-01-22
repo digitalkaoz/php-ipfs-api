@@ -28,13 +28,10 @@ use Doctrine\Common\Annotations\Annotation;
  * @Annotation()
  * @Annotation\Target({"METHOD"})
  * @Annotation\Attributes({
- *    @Annotation\Attribute("primary", type="boolean")
  *    @Annotation\Attribute("name", type="string")
  * })
  */
 class Api
 {
-    public $primary = false;
-
     public $name = null;
 }

@@ -15,3 +15,5 @@ extensions:
       output:
         clover: coverage.xml
         html: coverage
+
+bootstrap: tests/spec/bootstrap.php

@@ -35,7 +35,7 @@ final class Swarm implements Api
     /**
      * List local addresses.
      *
-     * @Endpoint(primary=false, name="swarm:addrs:local")
+     * @Endpoint(name="swarm:addrs:local")
      *
      * @param bool $id show peer ID in addresses
      *
@@ -49,7 +49,7 @@ final class Swarm implements Api
     /**
      * Open connection to a given address.
      *
-     * @Endpoint(primary=false, name="swarm:connect")
+     * @Endpoint(name="swarm:connect")
      *
      * @param string $arg address of peer to connect to
      *
@@ -63,7 +63,7 @@ final class Swarm implements Api
     /**
      * Close connection to a given address.
      *
-     * @Endpoint(primary=false, name="swarm:disconnect")
+     * @Endpoint(name="swarm:disconnect")
      *
      * @param string $arg address of peer to disconnect from
      *
@@ -77,7 +77,7 @@ final class Swarm implements Api
     /**
      * Add an address filter.
      *
-     * @Endpoint(primary=false, name="swarm:filters:add")
+     * @Endpoint(name="swarm:filters:add")
      *
      * @param string $arg multiaddr to filter
      *
@@ -91,7 +91,7 @@ final class Swarm implements Api
     /**
      * Remove an address filter.
      *
-     * @Endpoint(primary=false, name="swarm:filters:rm")
+     * @Endpoint(name="swarm:filters:rm")
      *
      * @param string $arg multiaddr filter to remove
      *
@@ -105,7 +105,7 @@ final class Swarm implements Api
     /**
      * List peers with open connections.
      *
-     * @Endpoint(primary=false, name="swarm:peers")
+     * @Endpoint(name="swarm:peers")
      *
      * @param bool $verbose also display latency along with peer information in the following form:
      *

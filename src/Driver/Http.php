@@ -129,7 +129,7 @@ class Http implements Driver
     private function getConfig(Command $command): array
     {
         $config = [
-            'path'   => '/' . str_replace(':', '/', $this->reader->getApi($command->getMethod())->name),
+            'path'   => '/' . str_replace(':', '/', $this->reader->getName($command->getMethod())),
             'method' => 'GET',
         ];
 

@@ -35,7 +35,7 @@ final class Log implements Api
     /**
      * Change the logging level.
      *
-     * @Endpoint(primary=false, name="log:level")
+     * @Endpoint(name="log:level")
      *
      * @param string $arg  the subsystem logging identifier
      * @param string $arg1 the log level, with 'debug' the most verbose and 'critical' the least verbose
@@ -50,7 +50,7 @@ final class Log implements Api
     /**
      * List the logging subsystems.
      *
-     * @Endpoint(primary=false, name="log:ls")
+     * @Endpoint(name="log:ls")
      *
      * @return Command
      */
@@ -62,7 +62,7 @@ final class Log implements Api
     /**
      * Read the logs.
      *
-     * @Endpoint(primary=false, name="log:tail")
+     * @Endpoint(name="log:tail")
      *
      * @return Command
      */

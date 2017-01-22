@@ -35,7 +35,7 @@ final class Files implements Api
     /**
      * Copy files into mfs.
      *
-     * @Endpoint(primary=false, name="files:cp")
+     * @Endpoint(name="files:cp")
      *
      * @param string $arg  source object to copy
      * @param string $arg1 destination to copy object to
@@ -50,7 +50,7 @@ final class Files implements Api
     /**
      * Flush a given path's data to disk.
      *
-     * @Endpoint(primary=false, name="files:flush")
+     * @Endpoint(name="files:flush")
      *
      * @param string $arg path to flush
      *
@@ -64,7 +64,7 @@ final class Files implements Api
     /**
      * List directories.
      *
-     * @Endpoint(primary=false, name="files:ls")
+     * @Endpoint(name="files:ls")
      *
      * @param string $arg path to show listing for
      * @param bool   $l   use long listing format
@@ -79,7 +79,7 @@ final class Files implements Api
     /**
      * Make directories.
      *
-     * @Endpoint(primary=false, name="files:mkdir")
+     * @Endpoint(name="files:mkdir")
      *
      * @param string $arg     path to dir to make
      * @param bool   $parents no error if existing, make parent directories as needed
@@ -94,7 +94,7 @@ final class Files implements Api
     /**
      * Move files.
      *
-     * @Endpoint(primary=false, name="files:mv")
+     * @Endpoint(name="files:mv")
      *
      * @param string $arg  source file to move
      * @param string $arg1 destination path for file to be moved to
@@ -109,7 +109,7 @@ final class Files implements Api
     /**
      * Read a file in a given mfs.
      *
-     * @Endpoint(primary=false, name="files:read")
+     * @Endpoint(name="files:read")
      *
      * @param string $arg    path to file to be read
      * @param int    $offset byte offset to begin reading from
@@ -125,7 +125,7 @@ final class Files implements Api
     /**
      * Remove a file.
      *
-     * @Endpoint(primary=false, name="files:rm")
+     * @Endpoint(name="files:rm")
      *
      * @param string $arg       file to remove
      * @param bool   $recursive recursively remove directories
@@ -140,7 +140,7 @@ final class Files implements Api
     /**
      * Display file status.
      *
-     * @Endpoint(primary=false, name="files:stat")
+     * @Endpoint(name="files:stat")
      *
      * @param string $arg    path to node to stat
      * @param string $format print statistics in given format
@@ -157,7 +157,7 @@ final class Files implements Api
     /**
      * Write to a mutable file in a given filesystem.
      *
-     * @Endpoint(primary=false, name="files:write")
+     * @Endpoint(name="files:write")
      *
      * @param string $arg      path to write to
      * @param string $file     data to write
