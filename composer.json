@@ -52,6 +52,6 @@
         "cs": "php-cs-fixer fix",
         "cs-check": "php-cs-fixer fix --dry-run -vv --diff",
         "rebuild-api" : "php bin/php-ipfs rebuild && composer cs",
-        "build" : "rm -rf vendor/* && composer install -q --ansi -a -o --no-dev && box --ansi -v build && composer --ansi -q update"
+        "build" : "rm -rf vendor/* && composer require php-http/guzzle6-adapter && composer install -q --ansi -a -o --no-dev && box --ansi -v build && composer --ansi -q update && git checkout -- composer.json"
     }
 }
