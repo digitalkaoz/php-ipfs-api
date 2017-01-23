@@ -24,7 +24,7 @@ namespace IPFS\Console;
 
 use ArgumentsResolver\NamedArgumentsResolver;
 use IPFS\Api;
-use IPFS\Driver\Client;
+use IPFS\Client;
 use IPFS\Utils\AnnotationReader;
 use IPFS\Utils\CaseFormatter;
 use Pimple\Container;
@@ -124,8 +124,8 @@ class CommandBuilder
         return function (InputInterface $input, OutputInterface $output) use ($name, $method, $api) {
             $fn = $method->getClosure($api);
 
-            $options = $this->caseTransformArray($input->getOptions());
-            $arguments = $this->caseTransformArray($input->getArguments());
+            $options = CaseFormatter::dashToCamelArray($input->getOptions());
+            $arguments = CaseFormatter::dashToCamelArray($input->getArguments());
 
             $args = (new NamedArgumentsResolver($method))->resolve(array_merge($options, $arguments));
             $args = $this->sanitizeArguments($args);
@@ -142,16 +142,9 @@ class CommandBuilder
     public function sanitizeArguments(array $args): array
     {
         foreach ($args as $index => $value) {
-            $args[$index] = in_array($value, ['true', 'TRUE', 'false', 'FALSE'], true) ? filter_var($value, FILTER_VALIDATE_BOOLEAN) : $value;
+            $args[$index] = CaseFormatter::stringToBool($value);
         }
 
         return $args;
-    }
-
-    private function caseTransformArray(array $values): array
-    {
-        return array_combine(array_map(function ($name) {
-            return CaseFormatter::dashToCamel($name);
-        }, array_keys($values)), array_values($values));
     }
 }

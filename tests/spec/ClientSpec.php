@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -20,38 +18,30 @@ declare(strict_types=1);
  * <https://github.com/digitalkaoz/php-ipfs>
  */
 
-namespace IPFS\Console;
+namespace spec\IPFS;
 
-use IPFS\Api\ApiBuilder;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use IPFS\Client;
+use IPFS\Command\Command;
+use IPFS\Driver\Driver;
+use PhpSpec\ObjectBehavior;
 
-class ApiBuildCommand extends Command
+class ClientSpec extends ObjectBehavior
 {
-    /**
-     * @var ApiBuilder
-     */
-    private $builder;
-
-    public function __construct(ApiBuilder $builder)
+    public function let(Driver $driver)
     {
-        parent::__construct(null);
-        $this->builder = $builder;
+        $this->beConstructedWith($driver);
     }
 
-    protected function configure()
+    public function it_is_initializable()
     {
-        $this
-            ->setName('rebuild')
-            ->setDescription('rebuild api classes by parsing the official api doc')
-        ;
+        $this->shouldHaveType(Client::class);
+        $this->shouldImplement(Driver::class);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    public function it_passes_the_command_to_the_underlying_driver(Driver $driver, Command $command)
     {
-        $this->builder->build();
+        $driver->execute($command)->shouldBeCalled();
 
-        $output->writeln('updated Api Classes in <info>src/Api</info>');
+        $this->execute($command);
     }
 }

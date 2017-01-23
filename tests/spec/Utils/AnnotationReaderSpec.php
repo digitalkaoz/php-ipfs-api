@@ -20,16 +20,14 @@
 
 namespace spec\IPFS\Utils;
 
-use IPFS\Annotation\Api as Endpoint;
 use IPFS\Annotation\Param;
-use IPFS\Api\Api;
 use IPFS\Utils\AnnotationReader;
 use phpDocumentor\Reflection\DocBlockFactory;
 use PhpSpec\ObjectBehavior;
 
 class AnnotationReaderSpec extends ObjectBehavior
 {
-    const METHOD = 'spec\IPFS\Utils\TestApi::foo';
+    const METHOD = 'spec\IPFS\TestApi::foo';
 
     public function let()
     {
@@ -84,21 +82,5 @@ class AnnotationReaderSpec extends ObjectBehavior
         $parameters['lol']->getDefault()->shouldBe(1);
         $parameters['lol']->getName()->shouldBe('lol');
         $parameters['lol']->getDescription()->shouldBe('lol');
-    }
-}
-
-class TestApi implements Api
-{
-    /**
-     * this is a description.
-     *
-     * @Endpoint(name="test:foo")
-     *
-     * @param string $bar  bar
-     * @param bool   $bazz bazz
-     * @param int    $lol  lol
-     */
-    public function foo(string $bar, bool $bazz = false, int $lol = 1)
-    {
     }
 }

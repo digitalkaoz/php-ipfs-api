@@ -69,20 +69,19 @@ class Http implements Driver
         $request = $this->buildRequest($command, $this->getConfig($command));
 
         return $this->client->sendAsyncRequest($request)->then(function (ResponseInterface $response) {
-            return $response->getBody()->getContents();
+            return (string) $response->getBody()->getContents();
         })->wait();
     }
 
     private function buildRequest(Command $command, $config): RequestInterface
     {
-        $config['method'] = isset($config['method']) ? $config['method'] : 'GET';
-        $body = 'POST' === $config['method'] ? $this->buildBody($command) : null;
+        $body = $this->buildBody($command);
 
         return $this->messageFactory->createRequest(
             $config['method'],
             $this->buildUri($command, $config),
             $this->buildHeaders($body),
-            $body ? $body->build() : null
+            $body->build()
         );
     }
 
@@ -91,7 +90,7 @@ class Http implements Driver
         $uri = $this->uriFactory->createUri($this->baseUri . $config['path']);
         $vars = [];
 
-        foreach ($command->getArgs() as $name => $value) {
+        foreach ($command->getArguments() as $name => $value) {
             if (is_string($value) && is_readable($value)) {
                 continue;
             }
@@ -99,7 +98,7 @@ class Http implements Driver
             $vars[$name] = $value;
         }
 
-        //fix arg1= arg2= to arg= weird but seems to be correct (doubled query names)
+        //fix arg1= arg2= to arg= weird but seems to be correct (doubled query variable names)
         $query = preg_replace('/(\d+)=/', '=', http_build_query($vars));
 
         return $uri->withQuery($query);
@@ -109,20 +108,25 @@ class Http implements Driver
     {
         $builder = new MultipartStreamBuilder();
 
-        foreach ($command->getArgs() as $name => $value) {
+        foreach ($command->getArguments() as $name => $value) {
             if (is_string($value) && is_readable($value)) {
-                $builder->addResource($name, fopen($command->getArgs()[$name], 'rb'), ['filename' => $value, 'headers' => ['Content-Type' => 'application/octet-stream']]);
+                $builder->addResource($name, fopen($command->getArguments()[$name], 'rb'), [
+                    'filename' => $value,
+                    'headers'  => ['Content-Type' => 'application/octet-stream'],
+                ]);
             }
         }
 
         return $builder;
     }
 
-    private function buildHeaders(MultipartStreamBuilder $body = null): array
+    private function buildHeaders(MultipartStreamBuilder $body): array
     {
+        $emptyBody = '--' . $body->getBoundary() . "--\r\n";
+
         return [
             'User-Agent'   => 'php-ipfs',
-            'Content-Type' => $body ? 'multipart/form-data; boundary=' . $body->getBoundary() : null,
+            'Content-Type' => $body->build()->getContents() !== $emptyBody ? 'multipart/form-data; boundary=' . $body->getBoundary() : null,
         ];
     }
 
@@ -133,7 +137,7 @@ class Http implements Driver
             'method' => 'GET',
         ];
 
-        foreach ($command->getArgs() as $arg) {
+        foreach ($command->getArguments() as $arg) {
             if (is_string($arg) && is_readable($arg)) {
                 $config['method'] = 'POST';
                 break;

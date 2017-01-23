@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -20,38 +18,38 @@ declare(strict_types=1);
  * <https://github.com/digitalkaoz/php-ipfs>
  */
 
-namespace IPFS\Console;
+namespace spec\IPFS\Console;
 
-use IPFS\Api\ApiBuilder;
+use IPFS\Console\ApiCommand;
+use PhpSpec\ObjectBehavior;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputOption;
 
-class ApiBuildCommand extends Command
+class ApiCommandSpec extends ObjectBehavior
 {
-    /**
-     * @var ApiBuilder
-     */
-    private $builder;
-
-    public function __construct(ApiBuilder $builder)
+    public function let()
     {
-        parent::__construct(null);
-        $this->builder = $builder;
+        $this->beConstructedWith('foo');
+
+        $this->setApplication(new Application());
+
+        $definition = new InputDefinition([
+            new InputOption('--quiet', null, InputOption::VALUE_NONE, 'my own quiet'),
+        ]);
+
+        $this->setDefinition($definition);
     }
 
-    protected function configure()
+    public function it_is_initializable()
     {
-        $this
-            ->setName('rebuild')
-            ->setDescription('rebuild api classes by parsing the official api doc')
-        ;
+        $this->shouldHaveType(ApiCommand::class);
+        $this->shouldHaveType(Command::class);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    public function it_only_appends_the_default_options_if_they_are_not_already_exists()
     {
-        $this->builder->build();
-
-        $output->writeln('updated Api Classes in <info>src/Api</info>');
+        $this->mergeApplicationDefinition(true);
     }
 }

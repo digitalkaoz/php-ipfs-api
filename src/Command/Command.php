@@ -49,7 +49,7 @@ class Command
         return CaseFormatter::camelToColon(str_replace('::', ':', $shortName));
     }
 
-    public function getArgs(): array
+    public function getArguments(): array
     {
         return $this->args;
     }

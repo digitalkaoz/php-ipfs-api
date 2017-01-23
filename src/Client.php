@@ -20,38 +20,25 @@ declare(strict_types=1);
  * <https://github.com/digitalkaoz/php-ipfs>
  */
 
-namespace IPFS\Console;
+namespace IPFS;
 
-use IPFS\Api\ApiBuilder;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use IPFS\Command\Command;
+use IPFS\Driver\Driver;
 
-class ApiBuildCommand extends Command
+class Client implements Driver
 {
     /**
-     * @var ApiBuilder
+     * @var Driver
      */
-    private $builder;
+    private $driver;
 
-    public function __construct(ApiBuilder $builder)
+    public function __construct(Driver $driver)
     {
-        parent::__construct(null);
-        $this->builder = $builder;
+        $this->driver = $driver;
     }
 
-    protected function configure()
+    public function execute(Command $command)
     {
-        $this
-            ->setName('rebuild')
-            ->setDescription('rebuild api classes by parsing the official api doc')
-        ;
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $this->builder->build();
-
-        $output->writeln('updated Api Classes in <info>src/Api</info>');
+        return $this->driver->execute($command);
     }
 }

@@ -20,38 +20,38 @@ declare(strict_types=1);
  * <https://github.com/digitalkaoz/php-ipfs>
  */
 
-namespace IPFS\Console;
+namespace IPFS\Utils;
 
-use IPFS\Api\ApiBuilder;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use Camel\Format\FormatInterface;
 
-class ApiBuildCommand extends Command
+class ConfigurableFormatter implements FormatInterface
 {
     /**
-     * @var ApiBuilder
+     * @var string
      */
-    private $builder;
+    private $delimiter;
 
-    public function __construct(ApiBuilder $builder)
+    public function __construct(string $delimiter)
     {
-        parent::__construct(null);
-        $this->builder = $builder;
+        $this->delimiter = $delimiter;
     }
 
-    protected function configure()
+    /**
+     * {@inheritdoc}
+     */
+    public function split($word)
     {
-        $this
-            ->setName('rebuild')
-            ->setDescription('rebuild api classes by parsing the official api doc')
-        ;
+        return explode($this->delimiter, $word);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    /**
+     * {@inheritdoc}
+     */
+    public function join(array $words)
     {
-        $this->builder->build();
+        // Ensure words are lowercase
+        $words = array_map('strtolower', $words);
 
-        $output->writeln('updated Api Classes in <info>src/Api</info>');
+        return implode($this->delimiter, $words);
     }
 }

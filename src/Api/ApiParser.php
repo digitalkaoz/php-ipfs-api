@@ -138,9 +138,7 @@ class ApiParser
 
         if (count($default) === 2) {
             $default = $default[1];
-            if (in_array($default, ['true', 'false', 'TRUE', 'FALSE'], true)) {
-                $default = filter_var($default, FILTER_VALIDATE_BOOLEAN);
-            }
+            $default = CaseFormatter::stringToBool($default);
 
             return $default;
         }

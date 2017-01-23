@@ -51,11 +51,13 @@ class Cli implements Driver
 
     public function execute(Command $command)
     {
-        $process = ($this->builder)::create($this->buildCommand($command))
+        $process = $this->builder
+            ->setArguments($this->buildCommand($command))
             ->enableOutput()
             ->inheritEnvironmentVariables()
             ->setWorkingDirectory(getenv('CWD'))
-            ->getProcess();
+            ->getProcess()
+        ;
 
         $process->start();
         $process->wait();
@@ -78,7 +80,7 @@ class Cli implements Driver
 
         $parsedParameters = [];
 
-        foreach ($command->getArgs() as $name => $value) {
+        foreach ($command->getArguments() as $name => $value) {
             if ($parameters[$name]->hasDefault() && $parameters[$name]->getDefault() !== $value) {
                 $parsedParameters[] = sprintf('--%s=%s', CaseFormatter::camelToDash($name), var_export($value, true));
                 continue;
@@ -89,7 +91,7 @@ class Cli implements Driver
                 continue;
             }
 
-            //TODO whoopsi?
+            throw new \LogicException(sprintf('"%s" is neither an option nor an argument', $name));
         }
 
         return $parsedParameters;

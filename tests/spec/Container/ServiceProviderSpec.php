@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -20,38 +18,26 @@ declare(strict_types=1);
  * <https://github.com/digitalkaoz/php-ipfs>
  */
 
-namespace IPFS\Console;
+namespace spec\IPFS\Container;
 
-use IPFS\Api\ApiBuilder;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use IPFS\Container\ServiceProvider;
+use PhpSpec\ObjectBehavior;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
+use Prophecy\Argument;
 
-class ApiBuildCommand extends Command
+class ServiceProviderSpec extends ObjectBehavior
 {
-    /**
-     * @var ApiBuilder
-     */
-    private $builder;
-
-    public function __construct(ApiBuilder $builder)
+    public function it_is_initializable()
     {
-        parent::__construct(null);
-        $this->builder = $builder;
+        $this->shouldHaveType(ServiceProvider::class);
+        $this->shouldImplement(ServiceProviderInterface::class);
     }
 
-    protected function configure()
+    public function it_registers_services(Container $container)
     {
-        $this
-            ->setName('rebuild')
-            ->setDescription('rebuild api classes by parsing the official api doc')
-        ;
-    }
+        $container->offsetSet(Argument::type('string'), Argument::type('callable'))->shouldBeCalled();
 
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $this->builder->build();
-
-        $output->writeln('updated Api Classes in <info>src/Api</info>');
+        $this->register($container);
     }
 }

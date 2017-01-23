@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -20,28 +18,37 @@ declare(strict_types=1);
  * <https://github.com/digitalkaoz/php-ipfs>
  */
 
-namespace IPFS\Utils;
+namespace spec\IPFS\Console;
 
-use Camel\Format\FormatInterface;
+use IPFS\Api\ApiBuilder;
+use IPFS\Console\ApiBuildCommand;
+use PhpSpec\ObjectBehavior;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
-class DashFormatter implements FormatInterface
+class ApiBuildCommandSpec extends ObjectBehavior
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function split($word)
+    public function let(ApiBuilder $builder)
     {
-        return explode('-', $word);
+        $this->beConstructedWith($builder);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function join(array $words)
+    public function it_is_initializable()
     {
-        // Ensure words are lowercase
-        $words = array_map('strtolower', $words);
+        $this->shouldHaveType(ApiBuildCommand::class);
+        $this->shouldHaveType(Command::class);
+    }
 
-        return implode('-', $words);
+    public function it_has_a_descriptive_name()
+    {
+        $this->getName()->shouldBe('rebuild');
+    }
+
+    public function it_calls_the_builder(ApiBuilder $builder, InputInterface $input, OutputInterface $output)
+    {
+        $builder->build()->shouldBeCalled();
+
+        $this->run($input, $output);
     }
 }

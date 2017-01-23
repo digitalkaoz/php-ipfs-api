@@ -133,7 +133,7 @@ class ServiceProvider implements ServiceProviderInterface
         $pimple[Application::class] = function (Container $pimple) {
             $app = new Application('ipfs', '@git-version@');
             $app->addCommands($pimple[CommandBuilder::class]->generateCommands());
-            $app->add(new ApiBuildCommand($pimple));
+            $app->add(new ApiBuildCommand($pimple[Api\ApiBuilder::class]));
 
             return $app;
         };

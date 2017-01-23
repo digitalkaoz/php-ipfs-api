@@ -75,7 +75,7 @@ this Driver is intended for programmatically usage:
 ```php
 $driver = $container[IPFS\Driver\Cli::class];
 //$driver = $container[IPFS\Driver\Http::class];
-$client = new IPFS\Driver\Client($driver);
+$client = new IPFS\Client($driver);
 
 $reponse = $client->execute((new \IPFS\Api\Basics())->version());
 

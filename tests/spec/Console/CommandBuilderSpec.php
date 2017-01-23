@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -20,38 +18,22 @@ declare(strict_types=1);
  * <https://github.com/digitalkaoz/php-ipfs>
  */
 
-namespace IPFS\Console;
+namespace spec\IPFS\Console;
 
-use IPFS\Api\ApiBuilder;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use IPFS\Console\CommandBuilder;
+use PhpSpec\ObjectBehavior;
+use Pimple\Container;
+use spec\IPFS\TestApi;
 
-class ApiBuildCommand extends Command
+class CommandBuilderSpec extends ObjectBehavior
 {
-    /**
-     * @var ApiBuilder
-     */
-    private $builder;
-
-    public function __construct(ApiBuilder $builder)
+    public function let(Container $container)
     {
-        parent::__construct(null);
-        $this->builder = $builder;
+        $this->beConstructedWith([new TestApi()], $container);
     }
 
-    protected function configure()
+    public function it_is_initializable()
     {
-        $this
-            ->setName('rebuild')
-            ->setDescription('rebuild api classes by parsing the official api doc')
-        ;
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $this->builder->build();
-
-        $output->writeln('updated Api Classes in <info>src/Api</info>');
+        $this->shouldHaveType(CommandBuilder::class);
     }
 }

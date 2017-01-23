@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -20,24 +18,37 @@ declare(strict_types=1);
  * <https://github.com/digitalkaoz/php-ipfs>
  */
 
-namespace IPFS\Driver;
+namespace spec\IPFS\Driver;
 
 use IPFS\Command\Command;
+use IPFS\Driver\Cli;
+use IPFS\Driver\Driver;
+use IPFS\Utils\AnnotationReader;
+use phpDocumentor\Reflection\DocBlockFactory;
+use PhpSpec\ObjectBehavior;
+use Symfony\Component\Process\ProcessBuilder;
 
-class Client implements Driver
+class CliSpec extends ObjectBehavior
 {
-    /**
-     * @var Driver
-     */
-    private $driver;
+    const METHOD = 'spec\IPFS\TestApi::foo';
 
-    public function __construct(Driver $driver)
+    public function let()
     {
-        $this->driver = $driver;
+        $this->beConstructedWith(
+            new ProcessBuilder(),
+            new AnnotationReader(new \Doctrine\Common\Annotations\AnnotationReader(), DocBlockFactory::createInstance()),
+            'echo'
+        );
     }
 
-    public function execute(Command $command)
+    public function it_is_initializable()
     {
-        return $this->driver->execute($command);
+        $this->shouldHaveType(Cli::class);
+        $this->shouldImplement(Driver::class);
+    }
+
+    public function it_creates_a_cli_command_and_passes_it_to_the_binary()
+    {
+        $this->execute(new Command(self::METHOD, ['bar' => 'bar', 'bazz' => true, 'lol' => 10]))->shouldBe("test api foo bar --bazz=true --lol=10\n");
     }
 }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -20,28 +18,31 @@ declare(strict_types=1);
  * <https://github.com/digitalkaoz/php-ipfs>
  */
 
-namespace IPFS\Utils;
+namespace spec\IPFS\Command;
 
-use Camel\Format\FormatInterface;
+use IPFS\Command\Command;
+use PhpSpec\ObjectBehavior;
 
-class ColonFormatter implements FormatInterface
+class CommandSpec extends ObjectBehavior
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function split($word)
+    public function let()
     {
-        return explode(':', $word);
+        $this->beConstructedWith(__CLASS__ . '::fooBarBazz', ['foo', 'bar']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function join(array $words)
+    public function it_is_initializable()
     {
-        // Ensure words are lowercase
-        $words = array_map('strtolower', $words);
+        $this->shouldHaveType(Command::class);
+    }
 
-        return implode(':', $words);
+    public function it_has_accessors_for_method_and_arguments()
+    {
+        $this->getMethod()->shouldBe(__CLASS__ . '::fooBarBazz');
+        $this->getArguments()->shouldBe(['foo', 'bar']);
+    }
+
+    public function it_can_convert_the_method_to_an_action()
+    {
+        $this->getAction()->shouldBe('command:spec:foo:bar:bazz');
     }
 }

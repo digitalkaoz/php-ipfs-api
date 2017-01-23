@@ -29,21 +29,33 @@ class CaseFormatter
 {
     public static function camelToColon($value)
     {
-        return (new CaseTransformer(new CamelCase(), new ColonFormatter()))->transform($value);
+        return (new CaseTransformer(new CamelCase(), new ConfigurableFormatter(':')))->transform($value);
     }
 
     public static function colonToCamel($value)
     {
-        return (new CaseTransformer(new ColonFormatter(), new CamelCase()))->transform($value);
+        return (new CaseTransformer(new ConfigurableFormatter(':'), new CamelCase()))->transform($value);
     }
 
     public static function dashToCamel($value)
     {
-        return (new CaseTransformer(new DashFormatter(), new CamelCase()))->transform($value);
+        return (new CaseTransformer(new ConfigurableFormatter('-'), new CamelCase()))->transform($value);
     }
 
     public static function camelToDash($value)
     {
-        return (new CaseTransformer(new CamelCase(), new DashFormatter()))->transform($value);
+        return (new CaseTransformer(new CamelCase(), new ConfigurableFormatter('-')))->transform($value);
+    }
+
+    public static function dashToCamelArray(array $values): array
+    {
+        return array_combine(array_map(function ($name) {
+            return self::dashToCamel($name);
+        }, array_keys($values)), array_values($values));
+    }
+
+    public static function stringToBool($value)
+    {
+        return is_string($value) && in_array(strtolower($value), ['true', 'false'], true) ? filter_var($value, FILTER_VALIDATE_BOOLEAN) : $value;
     }
 }
