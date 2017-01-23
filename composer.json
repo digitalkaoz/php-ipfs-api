@@ -50,6 +50,7 @@
         "test": "vendor/bin/phpspec run -f pretty --ansi -vv $@",
         "coverage": "vendor/bin/phpspec run -f pretty --ansi -vv -c phpspec.yml.coverage $@",
         "cs": "php-cs-fixer fix",
+        "cs-check": "php-cs-fixer fix --dry-run -vv --diff",
         "rebuild-api" : "php bin/php-ipfs rebuild && composer cs",
         "build" : "rm -rf vendor/* && composer install -q --ansi -a -o --no-dev && box --ansi -v build && composer --ansi -q update"
     }

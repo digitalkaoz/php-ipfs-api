@@ -33,7 +33,7 @@ class ApiParserSpec extends ObjectBehavior
     public function it_can_parse_the_api_docs_correctly()
     {
         ob_start();
-        @passthru('ping -c 1 ipfs.io', $response);
+        @passthru('curl -I https://ipfs.io/docs/api/', $response);
         ob_end_clean();
 
         if (0 !== $response) {

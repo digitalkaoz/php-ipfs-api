@@ -21,14 +21,16 @@ matrix:
     - php: 7.0
       env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" TEST_COMMAND="composer coverage" COVERAGE=true"
     - php: 7.0
-      env: TEST_COMMAND="bin/rebuild"
+      env: TEST_COMMAND="bin/rebuild" CS=true
+    - php: 7.0
+      env: TEST_COMMAND="composer cs-check"  CS=true
   allow_failures:
     - php: hhvm
 
 before_install:
   - travis_retry composer self-update
   - if [[ "$COVERAGE" = true ]]; then composer require --no-update --dev henrikbjorn/phpspec-code-coverage; fi
-  - if [[ "$TEST_COMMAND" = "bin/rebuild" ]]; then composer global require friendsofphp/php-cs-fixer && export PATH="$PATH:$HOME/.composer/vendor/bin"; fi
+  - if [[ "$CS" = true ]]; then composer global require friendsofphp/php-cs-fixer && export PATH="$PATH:$HOME/.composer/vendor/bin"; fi
 
 install:
   - travis_retry composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction
