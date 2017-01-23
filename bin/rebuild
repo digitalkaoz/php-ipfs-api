@@ -2,8 +2,8 @@
 
 composer rebuild-api
 
-git ls-files -m
+echo "MODIFIED FILES:"
+git ls-files -m src/Api
 
-set +o pipefail
-git ls-files -m | wc -l; exit "${PIPESTATUS[0]}"
+exit $(git ls-files -m src/Api | wc -l)
 
