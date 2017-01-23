@@ -3,21 +3,12 @@
 declare(strict_types=1);
 
 /*
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * This file is part of the "php-ipfs" package.
  *
- * This software consists of voluntary contributions made by many individuals
- * and is licensed under the MIT license. For more information, see
- * <https://github.com/digitalkaoz/php-ipfs>
+ * (c) Robert Schönthal <robert.schoenthal@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace IPFS\Console;
@@ -25,9 +16,9 @@ namespace IPFS\Console;
 use ArgumentsResolver\NamedArgumentsResolver;
 use IPFS\Api;
 use IPFS\Client;
+use IPFS\Driver\Driver;
 use IPFS\Utils\AnnotationReader;
 use IPFS\Utils\CaseFormatter;
-use Pimple\Container;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -46,18 +37,19 @@ class CommandBuilder
      */
     private $reader;
     /**
-     * @var Container
+     * @var array|Driver[]
      */
-    private $container;
+    private $drivers = [];
 
-    public function __construct(array $apis, Container $container)
+    public function __construct(array $apis, AnnotationReader $reader)
     {
         $this->apis = $apis;
-        $this->container = $container;
-
-        $this->reader = $this->container[AnnotationReader::class];
+        $this->reader = $reader;
     }
 
+    /**
+     * @return array|ApiCommand[]
+     */
     public function generateCommands(): array
     {
         $commands = [];
@@ -130,16 +122,30 @@ class CommandBuilder
             $args = (new NamedArgumentsResolver($method))->resolve(array_merge($options, $arguments));
             $args = $this->sanitizeArguments($args);
 
-            $client = new Client($this->container[$input->getOption('driver')]);
+            $client = new Client($this->chooseClient($input->getOption('driver')));
             $response = $client->execute($fn(...$args));
 
             $output->writeln($response);
-            //dump($response, json_decode($response, true));
-            //$output->writeln(print_r(json_decode($response, true), true));
         };
     }
 
-    public function sanitizeArguments(array $args): array
+    public function addDriver(Driver $driver): CommandBuilder
+    {
+        $this->drivers[get_class($driver)] = $driver;
+
+        return $this;
+    }
+
+    private function chooseClient(string $class): Driver
+    {
+        if (!isset($this->drivers[$class])) {
+            throw new \InvalidArgumentException(sprintf('"%s" is an unknown Driver, please add it with "addDriver"', $class));
+        }
+
+        return $this->drivers[$class];
+    }
+
+    private function sanitizeArguments(array $args): array
     {
         foreach ($args as $index => $value) {
             $args[$index] = CaseFormatter::stringToBool($value);
