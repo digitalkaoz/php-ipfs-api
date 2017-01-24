@@ -20,11 +20,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ApiBuildCommand extends Command
 {
     /**
-     * @var callable
+     * @var \Closure
      */
     private $builder;
 
-    public function __construct(callable $builder)
+    public function __construct(\Closure $builder)
     {
         parent::__construct(null);
         $this->builder = $builder;

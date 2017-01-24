@@ -37,7 +37,7 @@ class CommandBuilder
      */
     private $reader;
     /**
-     * @var array|Driver[]
+     * @var array|\Closure[]
      */
     private $drivers = [];
 
@@ -129,7 +129,7 @@ class CommandBuilder
         };
     }
 
-    public function addDriver(string $name, callable $driver): CommandBuilder
+    public function addDriver(string $name, \Closure $driver): CommandBuilder
     {
         $this->drivers[$name] = $driver;
 
