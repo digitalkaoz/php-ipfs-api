@@ -71,7 +71,9 @@ class CommandBuilderSpec extends ObjectBehavior
 
     public function it_invokes_the_driver_on_run(Driver $driver, OutputInterface $output)
     {
-        $this->getWrappedObject()->addDriver($driver->getWrappedObject());
+        $this->getWrappedObject()->addDriver(get_class($driver->getWrappedObject()), function () use ($driver) {
+            return $driver->getWrappedObject();
+        });
 
         $command = $this->generateCommands()['test:foo'];
         $command->setApplication(new Application());

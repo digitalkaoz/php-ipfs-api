@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace IPFS\Console;
 
-use IPFS\Api\ApiBuilder;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,11 +20,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ApiBuildCommand extends Command
 {
     /**
-     * @var ApiBuilder
+     * @var callable
      */
     private $builder;
 
-    public function __construct(ApiBuilder $builder)
+    public function __construct(callable $builder)
     {
         parent::__construct(null);
         $this->builder = $builder;
@@ -41,7 +40,7 @@ class ApiBuildCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->builder->build();
+        $this->builder->__invoke()->build();
 
         $output->writeln('updated Api Classes in <info>src/Api</info>');
     }

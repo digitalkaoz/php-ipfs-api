@@ -42,7 +42,6 @@ class ServiceProvider implements ServiceProviderInterface
     public function register(Container $pimple)
     {
         $this->registerDriver($pimple);
-        $this->registerHttp($pimple);
         $this->registerConsole($pimple);
 
         $pimple[AnnotationReader::class] = function () {
@@ -52,7 +51,9 @@ class ServiceProvider implements ServiceProviderInterface
             );
         };
 
-        $pimple[Api\ApiBuilder::class] = function (Container $pimple) {
+        $pimple[Api\ApiBuilder::class] = function () use ($pimple) {
+            $this->registerHttp($pimple);
+
             $parser = new Api\ApiParser($pimple[HttpAsyncClient::class], $pimple[MessageFactory::class], new Crawler());
             $generator = new Api\ApiGenerator(new BuilderFactory());
 
@@ -80,7 +81,9 @@ class ServiceProvider implements ServiceProviderInterface
 
     private function registerDriver(Container $pimple)
     {
-        $pimple[Http::class] = function (Container $pimple) {
+        $pimple[Http::class] = function () use ($pimple) {
+            $this->registerHttp($pimple);
+
             return new Http(
                 $pimple[HttpAsyncClient::class],
                 $pimple[MessageFactory::class],
@@ -90,7 +93,7 @@ class ServiceProvider implements ServiceProviderInterface
             );
         };
 
-        $pimple[Cli::class] = function (Container $pimple) {
+        $pimple[Cli::class] = function () use ($pimple) {
             return new Cli(new ProcessBuilder(), $pimple[AnnotationReader::class], getenv('IPFS_BINARY') ?: 'ipfs');
         };
     }
@@ -120,8 +123,8 @@ class ServiceProvider implements ServiceProviderInterface
                 new Api\Tour(),
             ], $pimple[AnnotationReader::class]);
 
-            $builder->addDriver($pimple[Cli::class]);
-            $builder->addDriver($pimple[Http::class]);
+            $builder->addDriver(Cli::class, $pimple->raw(Cli::class));
+            $builder->addDriver(Http::class, $pimple->raw(Http::class));
 
             return $builder;
         };
@@ -129,7 +132,7 @@ class ServiceProvider implements ServiceProviderInterface
         $pimple[Application::class] = function (Container $pimple) {
             $app = new Application('ipfs', '@git-version@');
             $app->addCommands($pimple[CommandBuilder::class]->generateCommands());
-            $app->add(new ApiBuildCommand($pimple[Api\ApiBuilder::class]));
+            $app->add(new ApiBuildCommand($pimple->raw(Api\ApiBuilder::class)));
 
             return $app;
         };

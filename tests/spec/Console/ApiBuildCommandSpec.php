@@ -22,7 +22,9 @@ class ApiBuildCommandSpec extends ObjectBehavior
 {
     public function let(ApiBuilder $builder)
     {
-        $this->beConstructedWith($builder);
+        $this->beConstructedWith(function () use ($builder) {
+            return $builder->getWrappedObject();
+        });
     }
 
     public function it_is_initializable()
@@ -38,8 +40,8 @@ class ApiBuildCommandSpec extends ObjectBehavior
 
     public function it_calls_the_builder(ApiBuilder $builder, InputInterface $input, OutputInterface $output)
     {
-        $builder->build()->shouldBeCalled();
-
         $this->run($input, $output);
+
+        $builder->build()->shouldHaveBeenCalled();
     }
 }

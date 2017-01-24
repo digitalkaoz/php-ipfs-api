@@ -81,8 +81,6 @@ class Cli implements Driver
                 $parsedParameters[] = $value;
                 continue;
             }
-
-            throw new \LogicException(sprintf('"%s" is neither an option nor an argument', $name));
         }
 
         return $parsedParameters;

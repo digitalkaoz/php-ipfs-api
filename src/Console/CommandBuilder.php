@@ -129,9 +129,9 @@ class CommandBuilder
         };
     }
 
-    public function addDriver(Driver $driver): CommandBuilder
+    public function addDriver(string $name, callable $driver): CommandBuilder
     {
-        $this->drivers[get_class($driver)] = $driver;
+        $this->drivers[$name] = $driver;
 
         return $this;
     }
@@ -142,7 +142,9 @@ class CommandBuilder
             throw new \InvalidArgumentException(sprintf('"%s" is an unknown Driver, please add it with "addDriver"', $class));
         }
 
-        return $this->drivers[$class];
+        //the driver is injected as Closure to allow lazy instantiation
+
+        return $this->drivers[$class]->__invoke();
     }
 
     private function sanitizeArguments(array $args): array
