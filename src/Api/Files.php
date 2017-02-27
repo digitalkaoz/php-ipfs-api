@@ -53,7 +53,7 @@ final class Files implements Api
     }
 
     /**
-     * List directories.
+     * List directories in the local mutable namespace.
      *
      * @Endpoint(name="files:ls")
      *

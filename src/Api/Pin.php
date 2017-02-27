@@ -24,7 +24,7 @@ use IPFS\Command\Command;
 final class Pin implements Api
 {
     /**
-     * Pins objects to local storage.
+     * Pin objects to local storage.
      *
      * @Endpoint(name="pin:add")
      *
@@ -55,7 +55,7 @@ final class Pin implements Api
     }
 
     /**
-     * Removes the pinned object from local storage.
+     * Remove pinned objects from local storage.
      *
      * @Endpoint(name="pin:rm")
      *
