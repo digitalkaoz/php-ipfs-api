@@ -98,11 +98,13 @@ final class Swarm implements Api
      *
      * @Endpoint(name="swarm:peers")
      *
-     * @param bool $verbose also display latency along with peer information in the following form:
+     * @param bool $verbose display all extra information
+     * @param bool $streams also list information about open streams for each peer
+     * @param bool $latency also list information about latency to each peer
      *
      * @return Command
      */
-    public function peers(bool $verbose = null): Command
+    public function peers(bool $verbose = null, bool $streams = null, bool $latency = null): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }

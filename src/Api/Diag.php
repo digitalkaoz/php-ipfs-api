@@ -50,7 +50,7 @@ final class Diag implements Api
     }
 
     /**
-     * Generates a network diagnostics report.
+     * Generate a network diagnostics report.
      *
      * @Endpoint(name="diag:net")
      *
@@ -64,7 +64,7 @@ final class Diag implements Api
     }
 
     /**
-     * Prints out system diagnostic information.
+     * Print system diagnostic information.
      *
      * @Endpoint(name="diag:sys")
      *

@@ -24,11 +24,11 @@ use IPFS\Command\Command;
 final class Basics implements Api
 {
     /**
-     * Add a file to ipfs.
+     * Add a file or directory to ipfs.
      *
      * @Endpoint(name="add")
      *
-     * @param string $file              the path to a file to be added to IPFS
+     * @param string $file              the path to a file to be added to ipfs
      * @param bool   $recursive         add directory paths recursively
      * @param bool   $quiet             write minimal output
      * @param bool   $silent            write no output
@@ -39,10 +39,11 @@ final class Basics implements Api
      * @param bool   $hidden            include files that are hidden
      * @param string $chunker           chunking algorithm to use
      * @param bool   $pin               pin this object when adding
+     * @param bool   $rawLeaves         use raw blocks for leaf nodes
      *
      * @return Command
      */
-    public function add(string $file, bool $recursive = false, bool $quiet = false, bool $silent = false, bool $progress = null, bool $trickle = false, bool $onlyHash = false, bool $wrapWithDirectory = false, bool $hidden = false, string $chunker = null, bool $pin = true): Command
+    public function add(string $file, bool $recursive = false, bool $quiet = null, bool $silent = null, bool $progress = null, bool $trickle = null, bool $onlyHash = null, bool $wrapWithDirectory = null, bool $hidden = null, string $chunker = null, bool $pin = true, bool $rawLeaves = null): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }
@@ -76,7 +77,7 @@ final class Basics implements Api
     }
 
     /**
-     * DNS link resolver.
+     * Resolve DNS links.
      *
      * @Endpoint(name="dns")
      *
@@ -109,7 +110,7 @@ final class Basics implements Api
     }
 
     /**
-     * Show IPFS Node ID info.
+     * Show ipfs node id info.
      *
      * @Endpoint(name="id")
      *
@@ -124,7 +125,7 @@ final class Basics implements Api
     }
 
     /**
-     * List links from an object.
+     * List directory contents for Unix filesystem objects.
      *
      * @Endpoint(name="ls")
      *
@@ -197,7 +198,7 @@ final class Basics implements Api
     }
 
     /**
-     * Shows ipfs version information.
+     * Show ipfs version information.
      *
      * @Endpoint(name="version")
      *

@@ -24,6 +24,20 @@ use IPFS\Command\Command;
 final class Bitswap implements Api
 {
     /**
+     * Show the current ledger for a peer.
+     *
+     * @Endpoint(name="bitswap:ledger")
+     *
+     * @param string $arg the PeerID (B58) of the ledger to inspect
+     *
+     * @return Command
+     */
+    public function ledger(string $arg): Command
+    {
+        return new Command(__METHOD__, get_defined_vars());
+    }
+
+    /**
      * Show some diagnostic information on the bitswap agent.
      *
      * @Endpoint(name="bitswap:stat")

@@ -28,20 +28,21 @@ final class Name implements Api
      *
      * @Endpoint(name="name:publish")
      *
-     * @param string $arg      iPFS path of the object to be published
+     * @param string $arg      ipfs path of the object to be published
      * @param bool   $resolve  resolve given path before publishing
      * @param string $lifetime time duration that the record will be valid for
      * @param string $ttl      time duration this record should be cached for (caution: experimental)
+     * @param string $key      name of key to use
      *
      * @return Command
      */
-    public function publish(string $arg, bool $resolve = true, string $lifetime = '24h', string $ttl = null): Command
+    public function publish(string $arg, bool $resolve = true, string $lifetime = '24h', string $ttl = null, string $key = 'self'): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }
 
     /**
-     * Gets the value currently published at an IPNS name.
+     * Get the value currently published at an IPNS name.
      *
      * @Endpoint(name="name:resolve")
      *

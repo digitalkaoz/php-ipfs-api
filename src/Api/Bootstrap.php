@@ -48,7 +48,7 @@ final class Bootstrap implements Api
     }
 
     /**
-     * Removes all peers from the bootstrap list.
+     * Remove all peers from the bootstrap list.
      *
      * @Endpoint(name="bootstrap:rm:all")
      *

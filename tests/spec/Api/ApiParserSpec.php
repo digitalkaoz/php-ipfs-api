@@ -48,12 +48,12 @@ class ApiParserSpec extends ObjectBehavior
 
         $addApi->shouldBeLike([
             'parts'       => 'add',
-            'description' => 'Add a file to ipfs.',
+            'description' => 'Add a file or directory to ipfs.',
             'arguments'   => [
                 [
                     'name'        => 'file',
                     'required'    => true,
-                    'description' => 'The path to a file to be added to IPFS.',
+                    'description' => 'The path to a file to be added to ipfs.',
                     'default'     => null,
                     'type'        => 'string',
                 ], [
@@ -66,13 +66,13 @@ class ApiParserSpec extends ObjectBehavior
                     'name'        => 'quiet',
                     'required'    => false,
                     'description' => 'Write minimal output.',
-                    'default'     => false,
+                    'default'     => null,
                     'type'        => 'bool',
                 ], [
                     'name'        => 'silent',
                     'required'    => false,
                     'description' => 'Write no output.',
-                    'default'     => false,
+                    'default'     => null,
                     'type'        => 'bool',
                 ], [
                     'name'        => 'progress',
@@ -84,25 +84,25 @@ class ApiParserSpec extends ObjectBehavior
                     'name'        => 'trickle',
                     'required'    => false,
                     'description' => 'Use trickle-dag format for dag generation.',
-                    'default'     => false,
+                    'default'     => null,
                     'type'        => 'bool',
                 ], [
                     'name'        => 'onlyHash',
                     'required'    => false,
                     'description' => 'Only chunk and hash - do not write to disk.',
-                    'default'     => false,
+                    'default'     => null,
                     'type'        => 'bool',
                 ], [
                     'name'        => 'wrapWithDirectory',
                     'required'    => false,
                     'description' => 'Wrap files with a directory object.',
-                    'default'     => false,
+                    'default'     => null,
                     'type'        => 'bool',
                 ], [
                     'name'        => 'hidden',
                     'required'    => false,
                     'description' => 'Include files that are hidden.',
-                    'default'     => false,
+                    'default'     => null,
                     'type'        => 'bool',
                 ], [
                     'name'        => 'chunker',
@@ -115,6 +115,12 @@ class ApiParserSpec extends ObjectBehavior
                     'required'    => false,
                     'description' => 'Pin this object when adding.',
                     'default'     => true,
+                    'type'        => 'bool',
+                ], [
+                    'name'        => 'rawLeaves',
+                    'required'    => false,
+                    'description' => 'Use raw blocks for leaf nodes.',
+                    'default'     => null,
                     'type'        => 'bool',
                 ],
             ],

@@ -24,7 +24,7 @@ use IPFS\Command\Command;
 final class Config implements Api
 {
     /**
-     * Opens the config file for editing in $EDITOR.
+     * Open the config file for editing in $EDITOR.
      *
      * @Endpoint(name="config:edit")
      *
@@ -36,7 +36,7 @@ final class Config implements Api
     }
 
     /**
-     * Replaces the config with .
+     * Replace the config with .
      *
      * @Endpoint(name="config:replace")
      *
@@ -50,7 +50,7 @@ final class Config implements Api
     }
 
     /**
-     * Outputs the content of the config file.
+     * Output config file contents.
      *
      * @Endpoint(name="config:show")
      *

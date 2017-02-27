@@ -38,15 +38,34 @@ final class Block implements Api
     }
 
     /**
-     * Stores input as an IPFS block.
+     * Store input as an IPFS block.
      *
      * @Endpoint(name="block:put")
      *
-     * @param string $file the data to be stored as an IPFS block
+     * @param string $file   the data to be stored as an IPFS block
+     * @param string $format cid format for blocks to be created with
+     * @param string $mhtype multihash hash function
+     * @param int    $mhlen  multihash hash length
      *
      * @return Command
      */
-    public function put(string $file): Command
+    public function put(string $file, string $format = 'v0', string $mhtype = 'sha2-256', int $mhlen = -1): Command
+    {
+        return new Command(__METHOD__, get_defined_vars());
+    }
+
+    /**
+     * Remove IPFS block(s).
+     *
+     * @Endpoint(name="block:rm")
+     *
+     * @param string $arg   bash58 encoded multihash of block(s) to remove
+     * @param bool   $force ignore nonexistent blocks
+     * @param bool   $quiet write minimal output
+     *
+     * @return Command
+     */
+    public function rm(string $arg, bool $force = false, bool $quiet = false): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }

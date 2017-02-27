@@ -42,7 +42,7 @@ final class Tar implements Api
      *
      * @Endpoint(name="tar:cat")
      *
-     * @param string $arg iPFS path of archive to export
+     * @param string $arg ipfs path of archive to export
      *
      * @return Command
      */

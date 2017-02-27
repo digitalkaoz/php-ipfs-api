@@ -24,7 +24,7 @@ use IPFS\Command\Command;
 final class Refs implements Api
 {
     /**
-     * Lists all local references.
+     * List all local references.
      *
      * @Endpoint(name="refs:local")
      *

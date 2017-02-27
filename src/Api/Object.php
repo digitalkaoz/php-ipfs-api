@@ -24,7 +24,7 @@ use IPFS\Command\Command;
 final class Object implements Api
 {
     /**
-     * Outputs the raw bytes in an IPFS object.
+     * Output the raw bytes of an IPFS object.
      *
      * @Endpoint(name="object:data")
      *
@@ -38,7 +38,7 @@ final class Object implements Api
     }
 
     /**
-     * Takes a diff of the two given objects.
+     * Display the diff between two ipfs objects.
      *
      * @Endpoint(name="object:diff")
      *
@@ -68,7 +68,7 @@ final class Object implements Api
     }
 
     /**
-     * Outputs the links pointed to by the specified object.
+     * Output the links pointed to by the specified object.
      *
      * @Endpoint(name="object:links")
      *
@@ -83,7 +83,7 @@ final class Object implements Api
     }
 
     /**
-     * Creates a new object from an ipfs template.
+     * Create a new object from an ipfs template.
      *
      * @Endpoint(name="object:new")
      *
@@ -144,7 +144,7 @@ final class Object implements Api
     }
 
     /**
-     * Set the data field of an ipfs object.
+     * Set the data field of an IPFS object.
      *
      * @Endpoint(name="object:patch:set-data")
      *
@@ -159,7 +159,7 @@ final class Object implements Api
     }
 
     /**
-     * Stores input as a DAG object, outputs its key.
+     * Store input as a DAG object, print its key.
      *
      * @Endpoint(name="object:put")
      *
