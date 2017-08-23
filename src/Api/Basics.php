@@ -163,7 +163,7 @@ final class Basics implements Api
      *
      * @Endpoint(name="ping")
      *
-     * @param string $arg   iD of peer to be pinged
+     * @param string $arg   ID of peer to be pinged
      * @param int    $count number of ping messages to send
      *
      * @return Command

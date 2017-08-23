@@ -103,7 +103,7 @@ final class Object implements Api
      *
      * @param string $arg    the hash of the node to modify
      * @param string $arg1   name of link to create
-     * @param string $arg2   iPFS object to add link to
+     * @param string $arg2   IPFS object to add link to
      * @param bool   $create create intermediary nodes
      *
      * @return Command
