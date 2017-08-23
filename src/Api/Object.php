@@ -48,7 +48,7 @@ final class Object implements Api
      *
      * @return Command
      */
-    public function diff(string $arg, string $arg1, bool $verbose = null): Command
+    public function diff(string $arg, string $arg1, bool $verbose = false): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }
@@ -165,7 +165,7 @@ final class Object implements Api
      *
      * @param string $file         data to be stored as a DAG object
      * @param string $inputenc     encoding type of input data
-     * @param string $datafieldenc encoding type of the data field, either "text" or "base64"
+     * @param string $datafieldenc encoding type of the data field, either “text” or “base64”
      *
      * @return Command
      */

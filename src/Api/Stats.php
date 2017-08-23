@@ -43,7 +43,7 @@ final class Stats implements Api
      * @param string $peer     specify a peer to print bandwidth for
      * @param string $proto    specify a protocol to print bandwidth for
      * @param bool   $poll     print bandwidth at an interval
-     * @param string $interval time interval to wait between updating output, if 'poll' is true
+     * @param string $interval time interval to wait between updating output, if ‘poll’ is true
      *
      * @return Command
      */

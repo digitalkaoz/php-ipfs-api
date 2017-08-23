@@ -74,7 +74,7 @@ final class Pubsub implements Api
      *
      * @return Command
      */
-    public function sub(string $arg, bool $discover = null): Command
+    public function sub(string $arg, bool $discover = false): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }

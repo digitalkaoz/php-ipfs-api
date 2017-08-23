@@ -31,6 +31,7 @@ final class Basics implements Api
      * @param string $file              the path to a file to be added to ipfs
      * @param bool   $recursive         add directory paths recursively
      * @param bool   $quiet             write minimal output
+     * @param bool   $quieter           write only final hash
      * @param bool   $silent            write no output
      * @param bool   $progress          stream progress data
      * @param bool   $trickle           use trickle-dag format for dag generation
@@ -40,10 +41,12 @@ final class Basics implements Api
      * @param string $chunker           chunking algorithm to use
      * @param bool   $pin               pin this object when adding
      * @param bool   $rawLeaves         use raw blocks for leaf nodes
+     * @param bool   $nocopy            add the file using filestore
+     * @param bool   $fscache           check the filestore for pre-existing blocks
      *
      * @return Command
      */
-    public function add(string $file, bool $recursive = false, bool $quiet = null, bool $silent = null, bool $progress = null, bool $trickle = null, bool $onlyHash = null, bool $wrapWithDirectory = null, bool $hidden = null, string $chunker = null, bool $pin = true, bool $rawLeaves = null): Command
+    public function add(string $file, bool $recursive = false, bool $quiet = false, bool $quieter = false, bool $silent = false, bool $progress = false, bool $trickle = false, bool $onlyHash = false, bool $wrapWithDirectory = false, bool $hidden = false, string $chunker = null, bool $pin = true, bool $rawLeaves = false, bool $nocopy = false, bool $fscache = false): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }

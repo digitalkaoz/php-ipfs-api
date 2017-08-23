@@ -39,7 +39,7 @@ final class Files implements Api
     }
 
     /**
-     * Flush a given path's data to disk.
+     * Flush a given path’s data to disk.
      *
      * @Endpoint(name="files:flush")
      *
@@ -47,7 +47,7 @@ final class Files implements Api
      *
      * @return Command
      */
-    public function flush(string $arg = null): Command
+    public function flush(string $arg = '/'): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }
@@ -62,7 +62,7 @@ final class Files implements Api
      *
      * @return Command
      */
-    public function ls(string $arg = null, bool $l = null): Command
+    public function ls(string $arg = '/', bool $l = false): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }
@@ -77,7 +77,7 @@ final class Files implements Api
      *
      * @return Command
      */
-    public function mkdir(string $arg, bool $parents = null): Command
+    public function mkdir(string $arg, bool $parents = false): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }
@@ -123,7 +123,7 @@ final class Files implements Api
      *
      * @return Command
      */
-    public function rm(string $arg, bool $recursive = null): Command
+    public function rm(string $arg, bool $recursive = false): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }
@@ -140,7 +140,7 @@ final class Files implements Api
      *
      * @return Command
      */
-    public function stat(string $arg, string $format = null, bool $hash = null, bool $size = null): Command
+    public function stat(string $arg, string $format = null, bool $hash = false, bool $size = false): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }
@@ -159,7 +159,7 @@ final class Files implements Api
      *
      * @return Command
      */
-    public function write(string $arg, string $file, int $offset = 0, bool $create = null, bool $truncate = null, int $count = 0): Command
+    public function write(string $arg, string $file, int $offset = 0, bool $create = false, bool $truncate = false, int $count = 0): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }

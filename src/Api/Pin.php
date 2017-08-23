@@ -30,10 +30,11 @@ final class Pin implements Api
      *
      * @param string $arg       path to object(s) to be pinned
      * @param bool   $recursive recursively pin the object linked to by the specified object(s)
+     * @param bool   $progress  show progress
      *
      * @return Command
      */
-    public function add(string $arg, bool $recursive = true): Command
+    public function add(string $arg, bool $recursive = true, bool $progress = false): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }

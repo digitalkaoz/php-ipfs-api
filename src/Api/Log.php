@@ -29,7 +29,7 @@ final class Log implements Api
      * @Endpoint(name="log:level")
      *
      * @param string $arg  the subsystem logging identifier
-     * @param string $arg1 the log level, with 'debug' the most verbose and 'critical' the least verbose
+     * @param string $arg1 the log level, with ‘debug’ the most verbose and ‘critical’ the least verbose
      *
      * @return Command
      */

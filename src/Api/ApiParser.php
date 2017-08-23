@@ -41,7 +41,7 @@ class ApiParser
         $this->crawler = $crawler;
     }
 
-    public function build(string $url = 'https://ipfs.io/docs/api/', string $prefix = '#apiv0'): array
+    public function build(string $url = 'https://ipfs.io/docs/api/', string $prefix = '#api-v0'): array
     {
         return $this->client
             ->sendAsyncRequest($this->messageFactory->createRequest('GET', $url))
@@ -61,6 +61,8 @@ class ApiParser
 
         $config = [];
         foreach ($links as $link) {
+            $link = $this->fixDocumentationLinks($link);
+
             $anchor = $this->crawler->filter($link)->first();
             $description = $anchor->nextAll()->first()->getNode(0)->nodeName === 'p' ? $anchor->nextAll()->first()->text() : null;
 
@@ -110,6 +112,8 @@ class ApiParser
                     'type'        => $this->parseTypeHint($description),
                 ];
 
+                $config['default'] = $config['type'] === 'bool' && $config['default'] === null ? false : $config['default'];
+
                 //fixup files
                 if ('file' === $config['type']) {
                     $config['type'] = 'string';
@@ -125,13 +129,12 @@ class ApiParser
 
     private function parseDefaultValue(string $description)
     {
-        preg_match('/Default\: \"(.+)\"/', $description, $default);
+        preg_match('/Default.* [‘|"|“]([^\.]+)[’|"|”]\./', $description, $default);
 
         if (count($default) === 2) {
-            $default = $default[1];
-            $default = CaseFormatter::stringToBool($default);
+            $default = preg_replace('/[^\x00-\x7f]/', '', $default[1]);
 
-            return $default;
+            return CaseFormatter::stringToBool($default);
         }
     }
 
@@ -146,10 +149,19 @@ class ApiParser
 
     private function parseTypeHint(string $description): string
     {
-        preg_match('/\[(.+)\]/', $description, $default);
+        preg_match('/\[([^\]]+)\]/', $description, $default);
 
         if (count($default) > 1) {
             return $default[1];
         }
+    }
+
+    private function fixDocumentationLinks(string $link): string
+    {
+        if ($link === '#api-v0-statsrepo') {
+            return '#api-v0-stats-repo';
+        }
+
+        return $link;
     }
 }

@@ -40,11 +40,12 @@ final class Repo implements Api
      *
      * @Endpoint(name="repo:gc")
      *
-     * @param bool $quiet write minimal output
+     * @param bool $quiet        write minimal output
+     * @param bool $streamErrors stream errors
      *
      * @return Command
      */
-    public function gc(bool $quiet = false): Command
+    public function gc(bool $quiet = false, bool $streamErrors = false): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }
@@ -84,7 +85,7 @@ final class Repo implements Api
      *
      * @return Command
      */
-    public function version(bool $quiet = null): Command
+    public function version(bool $quiet = false): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }

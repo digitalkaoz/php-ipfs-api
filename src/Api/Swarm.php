@@ -104,7 +104,7 @@ final class Swarm implements Api
      *
      * @return Command
      */
-    public function peers(bool $verbose = null, bool $streams = null, bool $latency = null): Command
+    public function peers(bool $verbose = false, bool $streams = false, bool $latency = false): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }

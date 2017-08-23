@@ -24,7 +24,7 @@ use IPFS\Command\Command;
 final class Name implements Api
 {
     /**
-     * Publish an object to IPNS.
+     * Publish IPNS names.
      *
      * @Endpoint(name="name:publish")
      *
@@ -32,7 +32,7 @@ final class Name implements Api
      * @param bool   $resolve  resolve given path before publishing
      * @param string $lifetime time duration that the record will be valid for
      * @param string $ttl      time duration this record should be cached for (caution: experimental)
-     * @param string $key      name of key to use
+     * @param string $key      name of the key to be used, as listed by ‘ipfs key list’
      *
      * @return Command
      */
@@ -42,7 +42,7 @@ final class Name implements Api
     }
 
     /**
-     * Get the value currently published at an IPNS name.
+     * Resolve IPNS names.
      *
      * @Endpoint(name="name:resolve")
      *
