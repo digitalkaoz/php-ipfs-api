@@ -1,4 +1,6 @@
-#PHP Adapter for IPFS
+# PHP Adapter for IPFS
+
+![ipfs](https://user-images.githubusercontent.com/1211152/29604883-ca3a4028-87e0-11e7-9f9a-75de49b06048.png)
 
 Dont know what ipfs is? the future of filesystems :) read [here](https://ipfs.io) for more information!
 
