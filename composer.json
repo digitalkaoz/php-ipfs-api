@@ -14,7 +14,7 @@
         "php": "^7.0",
         "pimple/pimple": "^3.0",
         "php-http/httplug": "^1.1",
-        "symfony/process": "^3.0",
+        "symfony/process": "^3.2",
         "webmozart/assert": "^1.2",
         "symfony/console": "^3.0",
         "doctrine/annotations": "^1.3",
