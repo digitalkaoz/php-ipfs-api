@@ -42,8 +42,11 @@ class Cli implements Driver
 
     public function execute(Command $command)
     {
+        //SYMFONY 3.2 compat
+        $script = implode(' ', array_map(['\\Symfony\\Component\\Process\\ProcessUtils', 'escapeArgument'], $this->buildCommand($command)));
+
         $process = $this->builder
-            ->setCommandLine($this->buildCommand($command))
+            ->setCommandLine($script)
             ->enableOutput()
             ->inheritEnvironmentVariables()
             ->setWorkingDirectory(getenv('CWD'))
