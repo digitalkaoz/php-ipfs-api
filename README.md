@@ -94,51 +94,57 @@ The following endpoints exists:
 
 ```
 Available commands:
-  add                       Add a file to ipfs.
+  add                       Add a file or directory to ipfs.
   cat                       Show IPFS object data.
   commands                  List all available commands.
-  dns                       DNS link resolver.
+  dns                       Resolve DNS links.
   get                       Download IPFS objects.
-  id                        Show IPFS Node ID info.
-  ls                        List links from an object.
+  help                      Displays help for a command
+  id                        Show ipfs node id info.
+  list                      Lists commands
+  ls                        List directory contents for Unix filesystem objects.
   mount                     Mounts IPFS to the filesystem (read-only).
   ping                      Send echo request packets to IPFS hosts.
+  rebuild                   rebuild api classes by parsing the official api doc
   resolve                   Resolve the value of names to IPFS.
   update
-  version                   Shows ipfs version information.
+  version                   Show ipfs version information.
  bitswap
+  bitswap:ledger            Show the current ledger for a peer.
   bitswap:stat              Show some diagnostic information on the bitswap agent.
   bitswap:unwant            Remove a given block from your wantlist.
   bitswap:wantlist          Show blocks currently on the wantlist.
  block
   block:get                 Get a raw IPFS block.
-  block:put                 Stores input as an IPFS block.
+  block:put                 Store input as an IPFS block.
+  block:rm                  Remove IPFS block(s).
   block:stat                Print information of a raw IPFS block.
  bootstrap
   bootstrap:add:default     Add default peers to the bootstrap list.
   bootstrap:list            Show peers in the bootstrap list.
-  bootstrap:rm:all          Removes all peers from the bootstrap list.
+  bootstrap:rm:all          Remove all peers from the bootstrap list.
  config
-  config:edit               Opens the config file for editing in $EDITOR.
-  config:replace            Replaces the config with .
-  config:show               Outputs the content of the config file.
+  config:edit               Open the config file for editing in $EDITOR.
+  config:replace            Replace the config with .
+  config:show               Output config file contents.
  dht
   dht:findpeer              Query the DHT for all of the multiaddresses associated with a Peer ID.
   dht:findprovs             Find peers in the DHT that can provide a specific value, given a key.
   dht:get                   Given a key, query the DHT for its best value.
+  dht:provide               Announce to the network that you are providing given values.
   dht:put                   Write a key/value pair to the DHT.
   dht:query                 Find the closest Peer IDs to a given Peer ID by querying the DHT.
  diag
   diag:cmds:clear           Clear inactive requests from the log.
   diag:cmds:set-time        Set how long to keep inactive requests in the log.
-  diag:net                  Generates a network diagnostics report.
-  diag:sys                  Prints out system diagnostic information.
+  diag:net                  Generate a network diagnostics report.
+  diag:sys                  Print system diagnostic information.
  file
   file:ls                   List directory contents for Unix filesystem objects.
  files
   files:cp                  Copy files into mfs.
-  files:flush               Flush a given path's data to disk.
-  files:ls                  List directories.
+  files:flush               Flush a given path’s data to disk.
+  files:ls                  List directories in the local mutable namespace.
   files:mkdir               Make directories.
   files:mv                  Move files.
   files:read                Read a file in a given mfs.
@@ -148,30 +154,30 @@ Available commands:
  log
   log:level                 Change the logging level.
   log:ls                    List the logging subsystems.
-  log:tail                  Read the logs.
+  log:tail                  Read the event log.
  name
-  name:publish              Publish an object to IPNS.
-  name:resolve              Gets the value currently published at an IPNS name.
+  name:publish              Publish IPNS names.
+  name:resolve              Resolve IPNS names.
  object
-  object:data               Outputs the raw bytes in an IPFS object.
-  object:diff               Takes a diff of the two given objects.
+  object:data               Output the raw bytes of an IPFS object.
+  object:diff               Display the diff between two ipfs objects.
   object:get                Get and serialize the DAG node named by .
-  object:links              Outputs the links pointed to by the specified object.
-  object:new                Creates a new object from an ipfs template.
+  object:links              Output the links pointed to by the specified object.
+  object:new                Create a new object from an ipfs template.
   object:patch:add-link     Add a link to a given object.
   object:patch:append-data  Append data to the data segment of a dag node.
   object:patch:rm-link      Remove a link from an object.
-  object:patch:set-data     Set the data field of an ipfs object.
-  object:put                Stores input as a DAG object, outputs its key.
+  object:patch:set-data     Set the data field of an IPFS object.
+  object:put                Store input as a DAG object, print its key.
   object:stat               Get stats for the DAG node named by .
  pin
-  pin:add                   Pins objects to local storage.
+  pin:add                   Pin objects to local storage.
   pin:ls                    List objects pinned to local storage.
-  pin:rm                    Removes the pinned object from local storage.
+  pin:rm                    Remove pinned objects from local storage.
  refs
-  refs:local                Lists all local references.
+  refs:local                List all local references.
  repo
-  repo:fsck                 Removes repo lockfiles.
+  repo:fsck                 Remove repo lockfiles.
   repo:gc                   Perform a garbage collection sweep on the repo.
   repo:stat                 Get stats for the currently used repo.
   repo:verify               Verify all blocks in repo are not corrupted.

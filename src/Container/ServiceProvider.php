@@ -32,7 +32,7 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Symfony\Component\Console\Application;
 use Symfony\Component\DomCrawler\Crawler;
-use Symfony\Component\Process\ProcessBuilder;
+use Symfony\Component\Process\Process;
 
 class ServiceProvider implements ServiceProviderInterface
 {
@@ -94,7 +94,7 @@ class ServiceProvider implements ServiceProviderInterface
         };
 
         $pimple[Cli::class] = function () use ($pimple) {
-            return new Cli(new ProcessBuilder(), $pimple[AnnotationReader::class], getenv('IPFS_BINARY') ?: 'ipfs');
+            return new Cli(new Process([]), $pimple[AnnotationReader::class], getenv('IPFS_BINARY') ?: 'ipfs');
         };
     }
 

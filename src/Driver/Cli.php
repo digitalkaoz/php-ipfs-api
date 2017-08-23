@@ -16,12 +16,12 @@ namespace IPFS\Driver;
 use IPFS\Command\Command;
 use IPFS\Utils\AnnotationReader;
 use IPFS\Utils\CaseFormatter;
-use Symfony\Component\Process\ProcessBuilder;
+use Symfony\Component\Process\Process;
 
 class Cli implements Driver
 {
     /**
-     * @var ProcessBuilder
+     * @var Process
      */
     private $builder;
     /**
@@ -33,7 +33,7 @@ class Cli implements Driver
      */
     private $reader;
 
-    public function __construct(ProcessBuilder $builder, AnnotationReader $reader, $binary = 'ipfs')
+    public function __construct(Process $builder, AnnotationReader $reader, $binary = 'ipfs')
     {
         $this->builder = $builder;
         $this->binary = $binary;
@@ -43,11 +43,10 @@ class Cli implements Driver
     public function execute(Command $command)
     {
         $process = $this->builder
-            ->setArguments($this->buildCommand($command))
+            ->setCommandLine($this->buildCommand($command))
             ->enableOutput()
             ->inheritEnvironmentVariables()
             ->setWorkingDirectory(getenv('CWD'))
-            ->getProcess()
         ;
 
         $process->start();

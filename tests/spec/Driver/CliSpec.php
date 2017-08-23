@@ -17,7 +17,7 @@ use IPFS\Driver\Driver;
 use IPFS\Utils\AnnotationReader;
 use phpDocumentor\Reflection\DocBlockFactory;
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\Process\ProcessBuilder;
+use Symfony\Component\Process\Process;
 
 class CliSpec extends ObjectBehavior
 {
@@ -26,7 +26,7 @@ class CliSpec extends ObjectBehavior
     public function let()
     {
         $this->beConstructedWith(
-            new ProcessBuilder(),
+            new Process([]),
             new AnnotationReader(new \Doctrine\Common\Annotations\AnnotationReader(), DocBlockFactory::createInstance()),
             'echo'
         );
