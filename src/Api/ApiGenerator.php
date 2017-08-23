@@ -78,7 +78,7 @@ class ApiGenerator
                 $default = $parameterConfig['default'];
 
                 if ($parameterConfig['type'] === 'int') {
-                    $default = (int)$default;
+                    $default = (int) $default;
                 }
                 $parameter->setDefault($default);
             }
