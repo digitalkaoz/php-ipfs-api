@@ -12,7 +12,7 @@ Dont know what ipfs is? the future of filesystems :) read [here](https://ipfs.io
 
 as always, use composer!
 ```
-$ composer require ipfs/php
+$ composer require ipfs/php-client
 ```
 
 ### choosing the HTTP Adapter
