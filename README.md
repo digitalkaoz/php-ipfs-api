@@ -231,6 +231,3 @@ this library is well covered with [phpspec](http://www.phpspec.net/)
 $ composer test
 ```
 
-##TODO
-
-* more tests
