@@ -4,9 +4,9 @@
 
 Dont know what ipfs is? the future of filesystems :) read [here](https://ipfs.io) for more information!
 
-[![Build Status](https://travis-ci.org/digitalkaoz/php-ipfs.svg?branch=master)](https://travis-ci.org/digitalkaoz/php-ipfs)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/digitalkaoz/php-ipfs/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/digitalkaoz/php-ipfs/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/digitalkaoz/php-ipfs/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/digitalkaoz/php-ipfs/?branch=master)
+[![Build Status](https://travis-ci.org/digitalkaoz/php-ipfs-api.svg?branch=master)](https://travis-ci.org/digitalkaoz/php-ipfs-api)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/digitalkaoz/php-ipfs-api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/digitalkaoz/php-ipfs-api/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/digitalkaoz/php-ipfs-api/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/digitalkaoz/php-ipfs-api/?branch=master)
 
 ## Installation
 
