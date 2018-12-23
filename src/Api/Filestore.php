@@ -40,11 +40,12 @@ final class Filestore implements Api
      *
      * @Endpoint(name="filestore:ls")
      *
-     * @param string $arg cid of objects to list
+     * @param string $arg       cid of objects to list
+     * @param bool   $fileOrder sort the results based on the path of the backing file
      *
      * @return Command
      */
-    public function ls(string $arg = null): Command
+    public function ls(string $arg = null, bool $fileOrder = false): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }
@@ -54,11 +55,12 @@ final class Filestore implements Api
      *
      * @Endpoint(name="filestore:verify")
      *
-     * @param string $arg cid of objects to verify
+     * @param string $arg       cid of objects to verify
+     * @param bool   $fileOrder verify the objects based on the order of the backing file
      *
      * @return Command
      */
-    public function verify(string $arg = null): Command
+    public function verify(string $arg = null, bool $fileOrder = false): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }

@@ -38,15 +38,17 @@ final class Basics implements Api
      * @param bool   $onlyHash          only chunk and hash - do not write to disk
      * @param bool   $wrapWithDirectory wrap files with a directory object
      * @param bool   $hidden            include files that are hidden
-     * @param string $chunker           chunking algorithm to use
+     * @param string $chunker           chunking algorithm, size-[bytes] or rabin-[min]-[avg]-[max]
      * @param bool   $pin               pin this object when adding
      * @param bool   $rawLeaves         use raw blocks for leaf nodes
      * @param bool   $nocopy            add the file using filestore
      * @param bool   $fscache           check the filestore for pre-existing blocks
+     * @param int    $cidVersion        CID version
+     * @param string $hash              hash function to use
      *
      * @return Command
      */
-    public function add(string $file, bool $recursive = false, bool $quiet = false, bool $quieter = false, bool $silent = false, bool $progress = false, bool $trickle = false, bool $onlyHash = false, bool $wrapWithDirectory = false, bool $hidden = false, string $chunker = null, bool $pin = true, bool $rawLeaves = false, bool $nocopy = false, bool $fscache = false): Command
+    public function add(string $file, bool $recursive = false, bool $quiet = false, bool $quieter = false, bool $silent = false, bool $progress = false, bool $trickle = false, bool $onlyHash = false, bool $wrapWithDirectory = false, bool $hidden = false, string $chunker = 'size-262144', bool $pin = true, bool $rawLeaves = false, bool $nocopy = false, bool $fscache = false, int $cidVersion = 0, string $hash = 'sha2-256'): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }
@@ -56,11 +58,13 @@ final class Basics implements Api
      *
      * @Endpoint(name="cat")
      *
-     * @param string $arg the path to the IPFS object(s) to be outputted
+     * @param string $arg    the path to the IPFS object(s) to be outputted
+     * @param int    $offset byte offset to begin reading from
+     * @param int    $length maximum number of bytes to read
      *
      * @return Command
      */
-    public function cat(string $arg): Command
+    public function cat(string $arg, int $offset = 0, int $length = 0): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }
@@ -107,7 +111,7 @@ final class Basics implements Api
      *
      * @return Command
      */
-    public function get(string $arg, string $output = null, bool $archive = false, bool $compress = false, int $compressionLevel = -1): Command
+    public function get(string $arg, string $output = null, bool $archive = false, bool $compress = false, int $compressionLevel = 0): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }
@@ -178,12 +182,26 @@ final class Basics implements Api
      *
      * @Endpoint(name="resolve")
      *
-     * @param string $arg       the name to resolve
-     * @param bool   $recursive resolve until the result is an IPFS name
+     * @param string $arg            the name to resolve
+     * @param bool   $recursive      resolve until the result is an IPFS name
+     * @param uint   $dhtRecordCount number of records to request for DHT resolution
+     * @param string $dhtTimeout     max time to collect values during DHT resolution eg “30s”
      *
      * @return Command
      */
-    public function resolve(string $arg, bool $recursive = false): Command
+    public function resolve(string $arg, bool $recursive = false, uint $dhtRecordCount = null, string $dhtTimeout = null): Command
+    {
+        return new Command(__METHOD__, get_defined_vars());
+    }
+
+    /**
+     * Shut down the ipfs daemon.
+     *
+     * @Endpoint(name="shutdown")
+     *
+     * @return Command
+     */
+    public function shutdown(): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }

@@ -107,10 +107,12 @@ Available commands:
   ping                      Send echo request packets to IPFS hosts.
   rebuild                   rebuild api classes by parsing the official api doc
   resolve                   Resolve the value of names to IPFS.
+  shutdown                  Shut down the ipfs daemon.
   update
   version                   Show ipfs version information.
  bitswap
   bitswap:ledger            Show the current ledger for a peer.
+  bitswap:reprovide         Trigger reprovider.
   bitswap:stat              Show some diagnostic information on the bitswap agent.
   bitswap:unwant            Remove a given block from your wantlist.
   bitswap:wantlist          Show blocks currently on the wantlist.
@@ -125,8 +127,13 @@ Available commands:
   bootstrap:rm:all          Remove all peers from the bootstrap list.
  config
   config:edit               Open the config file for editing in $EDITOR.
+  config:profile:apply      Apply profile to config.
   config:replace            Replace the config with .
   config:show               Output config file contents.
+ dag
+  dag:get                   Get a dag node from ipfs.
+  dag:put                   Add a dag node to ipfs.
+  dag:resolve               Resolve ipld block.
  dht
   dht:findpeer              Query the DHT for all of the multiaddresses associated with a Peer ID.
   dht:findprovs             Find peers in the DHT that can provide a specific value, given a key.
@@ -137,11 +144,11 @@ Available commands:
  diag
   diag:cmds:clear           Clear inactive requests from the log.
   diag:cmds:set-time        Set how long to keep inactive requests in the log.
-  diag:net                  Generate a network diagnostics report.
   diag:sys                  Print system diagnostic information.
  file
   file:ls                   List directory contents for Unix filesystem objects.
  files
+  files:chcid               Change the cid version or hash function of the root node of a given path.
   files:cp                  Copy files into mfs.
   files:flush               Flush a given path’s data to disk.
   files:ls                  List directories in the local mutable namespace.
@@ -151,12 +158,24 @@ Available commands:
   files:rm                  Remove a file.
   files:stat                Display file status.
   files:write               Write to a mutable file in a given filesystem.
+ filestore
+  filestore:dups            List blocks that are both in the filestore and standard block storage.
+  filestore:ls              List objects in filestore.
+  filestore:verify          Verify objects in filestore.
+ key
+  key:gen                   Create a new keypair.
+  key:list                  List all local keypairs.
+  key:rename                Rename a keypair.
+  key:rm                    Remove a keypair.
  log
   log:level                 Change the logging level.
   log:ls                    List the logging subsystems.
   log:tail                  Read the event log.
  name
   name:publish              Publish IPNS names.
+  name:pubsub:cancel        Cancel a name subscription.
+  name:pubsub:state         Query the state of IPNS pubsub.
+  name:pubsub:subs          Show current name subscriptions.
   name:resolve              Resolve IPNS names.
  object
   object:data               Output the raw bytes of an IPFS object.
@@ -170,10 +189,24 @@ Available commands:
   object:patch:set-data     Set the data field of an IPFS object.
   object:put                Store input as a DAG object, print its key.
   object:stat               Get stats for the DAG node named by .
+ p2p
+  p2p:listener:close        Close active p2p listener.
+  p2p:listener:ls           List active p2p listeners.
+  p2p:listener:open         Forward p2p connections to a network multiaddr.
+  p2p:stream:close          Close active p2p stream.
+  p2p:stream:dial           Dial to a p2p listener.
+  p2p:stream:ls             List active p2p streams.
  pin
   pin:add                   Pin objects to local storage.
   pin:ls                    List objects pinned to local storage.
   pin:rm                    Remove pinned objects from local storage.
+  pin:update                Update a recursive pin.
+  pin:verify                Verify that recursive pins are complete.
+ pubsub
+  pubsub:ls                 List subscribed topics by name.
+  pubsub:peers              List peers we are currently pubsubbing with.
+  pubsub:pub                Publish a message to a given pubsub topic.
+  pubsub:sub                Subscribe to messages on a given topic.
  refs
   refs:local                List all local references.
  repo
@@ -187,6 +220,7 @@ Available commands:
   stats:bw                  Print ipfs bandwidth information.
   stats:repo                Get stats for the currently used repo.
  swarm
+  swarm:addrs:listen        List interface listening addresses.
   swarm:addrs:local         List local addresses.
   swarm:connect             Open connection to a given address.
   swarm:disconnect          Close connection to a given address.
@@ -196,10 +230,6 @@ Available commands:
  tar
   tar:add                   Import a tar file into ipfs.
   tar:cat                   Export a tar file from IPFS.
- tour
-  tour:list                 Show a list of IPFS Tour topics.
-  tour:next                 Show the next IPFS Tour topic.
-  tour:restart              Restart the IPFS Tour.
 ```
 
 ## Usage

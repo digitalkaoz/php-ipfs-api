@@ -38,6 +38,18 @@ final class Bitswap implements Api
     }
 
     /**
+     * Trigger reprovider.
+     *
+     * @Endpoint(name="bitswap:reprovide")
+     *
+     * @return Command
+     */
+    public function reprovide(): Command
+    {
+        return new Command(__METHOD__, get_defined_vars());
+    }
+
+    /**
      * Show some diagnostic information on the bitswap agent.
      *
      * @Endpoint(name="bitswap:stat")

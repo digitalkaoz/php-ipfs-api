@@ -55,7 +55,7 @@ class ApiGenerator
             $prettyPrinter = new Standard();
 
             file_put_contents(
-                $this->location . '/' . ucfirst(CaseFormatter::dashToCamel($name)) . '.php',
+                $this->location . '/' . ucfirst(CaseFormatter::dashToCamel($this->generateClassName($name))) . '.php',
                 $prettyPrinter->prettyPrintFile([$header, $class])
             );
         }
@@ -77,7 +77,7 @@ class ApiGenerator
             if (!$parameterConfig['required']) {
                 $default = $parameterConfig['default'];
 
-                if ($parameterConfig['type'] === 'int') {
+                if ('int' === $parameterConfig['type']) {
                     $default = (int) $default;
                 }
                 $parameter->setDefault($default);
@@ -102,7 +102,7 @@ class ApiGenerator
             ->addStmt($this->builder->use(Endpoint::class)->as('Endpoint'))
             ->addStmt($this->builder->use(Command::class))
             ->addStmt(
-                $this->builder->class($name)
+                $this->builder->class($this->generateClassName($name))
                     ->implement('Api')
                     ->addStmts($methods)
                     ->setDocComment(
@@ -117,6 +117,15 @@ EOS
                     ->makeFinal()
             )
             ->getNode();
+    }
+
+    private function generateClassName(string $name): string
+    {
+        if ('Object' === $name) {
+            return 'Cobject';
+        }
+
+        return $name;
     }
 
     private function buildDocBlock(array $methodConfig): string

@@ -41,7 +41,7 @@ class ApiParser
         $this->crawler = $crawler;
     }
 
-    public function build(string $url = 'https://ipfs.io/docs/api/', string $prefix = '#api-v0'): array
+    public function build(string $url = 'https://docs.ipfs.io/reference/api/http/', string $prefix = '#api-v0'): array
     {
         return $this->client
             ->sendAsyncRequest($this->messageFactory->createRequest('GET', $url))
@@ -55,7 +55,7 @@ class ApiParser
     private function buildMethods(ResponseInterface $response, $prefix): array
     {
         $this->crawler->addHtmlContent($response->getBody()->getContents());
-        $links = $this->crawler->filter('li a[href^="' . $prefix . '"]')->each(function (Crawler $node) {
+        $links = $this->crawler->filter('main li a[href^="' . $prefix . '"]')->each(function (Crawler $node) {
             return $node->attr('href');
         });
 
@@ -64,7 +64,7 @@ class ApiParser
             $link = $this->fixDocumentationLinks($link);
 
             $anchor = $this->crawler->filter($link)->first();
-            $description = $anchor->nextAll()->first()->getNode(0)->nodeName === 'p' ? $anchor->nextAll()->first()->text() : null;
+            $description = 'p' === $anchor->nextAll()->first()->getNode(0)->nodeName ? $anchor->nextAll()->first()->text() : null;
 
             $methodConfig = [
                 'parts'       => str_replace('/', ':', str_replace('/api/v0/', '', $anchor->text())),
@@ -92,7 +92,7 @@ class ApiParser
     {
         $argumentsRootNode = $anchor->nextAll()->eq($index)->first();
 
-        if ($argumentsRootNode->getNode(0)->nodeName === 'ul') {
+        if ('ul' === $argumentsRootNode->getNode(0)->nodeName) {
             $names = [];
 
             return $argumentsRootNode->filter('li')->each(function (Crawler $argument) use (&$names) {
@@ -105,14 +105,14 @@ class ApiParser
                 }
 
                 $config = [
-                    'name'        => $names[$name] === 0 ? $name : $name . $names[$name],
+                    'name'        => 0 === $names[$name] ? $name : $name . $names[$name],
                     'required'    => $argument->filter('strong')->count() > 0,
                     'description' => $this->parseDescription($description),
                     'default'     => $this->parseDefaultValue($description),
                     'type'        => $this->parseTypeHint($description),
                 ];
 
-                $config['default'] = $config['type'] === 'bool' && $config['default'] === null ? false : $config['default'];
+                $config['default'] = 'bool' === $config['type'] && null === $config['default'] ? false : $config['default'];
 
                 //fixup files
                 if ('file' === $config['type']) {
@@ -131,7 +131,7 @@ class ApiParser
     {
         preg_match('/Default.* [‘|"|“]([^\.]+)[’|"|”]\./', $description, $default);
 
-        if (count($default) === 2) {
+        if (2 === count($default)) {
             $default = preg_replace('/[^\x00-\x7f]/', '', $default[1]);
 
             return CaseFormatter::stringToBool($default);
@@ -158,7 +158,7 @@ class ApiParser
 
     private function fixDocumentationLinks(string $link): string
     {
-        if ($link === '#api-v0-statsrepo') {
+        if ('#api-v0-statsrepo' === $link) {
             return '#api-v0-stats-repo';
         }
 

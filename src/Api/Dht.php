@@ -43,12 +43,13 @@ final class Dht implements Api
      *
      * @Endpoint(name="dht:findprovs")
      *
-     * @param string $arg     the key to find providers for
-     * @param bool   $verbose print extra information
+     * @param string $arg          the key to find providers for
+     * @param bool   $verbose      print extra information
+     * @param int    $numProviders the number of providers to find
      *
      * @return Command
      */
-    public function findprovs(string $arg, bool $verbose = false): Command
+    public function findprovs(string $arg, bool $verbose = false, int $numProviders = 20): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }

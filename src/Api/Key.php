@@ -52,4 +52,35 @@ final class Key implements Api
     {
         return new Command(__METHOD__, get_defined_vars());
     }
+
+    /**
+     * Rename a keypair.
+     *
+     * @Endpoint(name="key:rename")
+     *
+     * @param string $arg   name of key to rename Required:
+     * @param string $arg1  new name of the key Required:
+     * @param bool   $force allow to overwrite an existing key
+     *
+     * @return Command
+     */
+    public function rename(string $arg, string $arg1, bool $force = false): Command
+    {
+        return new Command(__METHOD__, get_defined_vars());
+    }
+
+    /**
+     * Remove a keypair.
+     *
+     * @Endpoint(name="key:rm")
+     *
+     * @param string $arg names of keys to remove Required:
+     * @param bool   $l   show extra information about keys
+     *
+     * @return Command
+     */
+    public function rm(string $arg, bool $l = false): Command
+    {
+        return new Command(__METHOD__, get_defined_vars());
+    }
 }

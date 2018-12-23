@@ -113,8 +113,8 @@ class ApiParserSpec extends ObjectBehavior
                 ], [
                     'name'        => 'chunker',
                     'required'    => false,
-                    'description' => 'Chunking algorithm to use.',
-                    'default'     => null,
+                    'description' => 'Chunking algorithm, size-[bytes] or rabin-[min]-[avg]-[max].',
+                    'default'     => 'size-262144',
                     'type'        => 'string',
                 ], [
                     'name'        => 'pin',
@@ -142,6 +142,20 @@ class ApiParserSpec extends ObjectBehavior
                     'description' => 'Check the filestore for pre-existing blocks.',
                     'default'     => false,
                     'type'        => 'bool',
+                ],
+                [
+                    'name'        => 'cidVersion',
+                    'required'    => false,
+                    'description' => 'CID version.',
+                    'default'     => null,
+                    'type'        => 'int',
+                ],
+                [
+                    'name'        => 'hash',
+                    'required'    => false,
+                    'description' => 'Hash function to use.',
+                    'default'     => 'sha2-256',
+                    'type'        => 'string',
                 ], ],
             'class'       => 'Basics',
             'method'      => 'add',

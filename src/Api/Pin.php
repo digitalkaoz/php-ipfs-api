@@ -69,4 +69,35 @@ final class Pin implements Api
     {
         return new Command(__METHOD__, get_defined_vars());
     }
+
+    /**
+     * Update a recursive pin.
+     *
+     * @Endpoint(name="pin:update")
+     *
+     * @param string $arg   path to old object
+     * @param string $arg1  path to new object to be pinned
+     * @param bool   $unpin remove the old pin
+     *
+     * @return Command
+     */
+    public function update(string $arg, string $arg1, bool $unpin = true): Command
+    {
+        return new Command(__METHOD__, get_defined_vars());
+    }
+
+    /**
+     * Verify that recursive pins are complete.
+     *
+     * @Endpoint(name="pin:verify")
+     *
+     * @param bool $verbose also write the hashes of non-broken pins
+     * @param bool $quiet   write just hashes of broken pins
+     *
+     * @return Command
+     */
+    public function verify(bool $verbose = false, bool $quiet = false): Command
+    {
+        return new Command(__METHOD__, get_defined_vars());
+    }
 }

@@ -49,7 +49,7 @@ final class Block implements Api
      *
      * @return Command
      */
-    public function put(string $file, string $format = 'v0', string $mhtype = 'sha2-256', int $mhlen = -1): Command
+    public function put(string $file, string $format = null, string $mhtype = 'sha2-256', int $mhlen = -1): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }

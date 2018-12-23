@@ -24,6 +24,22 @@ use IPFS\Command\Command;
 final class Files implements Api
 {
     /**
+     * Change the cid version or hash function of the root node of a given path.
+     *
+     * @Endpoint(name="files:chcid")
+     *
+     * @param string $arg        path to change
+     * @param int    $cidVersion cid version to use
+     * @param string $hash       hash function to use
+     *
+     * @return Command
+     */
+    public function chcid(string $arg = '/', int $cidVersion = 0, string $hash = null): Command
+    {
+        return new Command(__METHOD__, get_defined_vars());
+    }
+
+    /**
      * Copy files into mfs.
      *
      * @Endpoint(name="files:cp")
@@ -72,12 +88,14 @@ final class Files implements Api
      *
      * @Endpoint(name="files:mkdir")
      *
-     * @param string $arg     path to dir to make
-     * @param bool   $parents no error if existing, make parent directories as needed
+     * @param string $arg        path to dir to make
+     * @param bool   $parents    no error if existing, make parent directories as needed
+     * @param int    $cidVersion cid version to use
+     * @param string $hash       hash function to use
      *
      * @return Command
      */
-    public function mkdir(string $arg, bool $parents = false): Command
+    public function mkdir(string $arg, bool $parents = false, int $cidVersion = 0, string $hash = null): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }
@@ -133,14 +151,15 @@ final class Files implements Api
      *
      * @Endpoint(name="files:stat")
      *
-     * @param string $arg    path to node to stat
-     * @param string $format print statistics in given format
-     * @param bool   $hash   print only hash
-     * @param bool   $size   print only size
+     * @param string $arg       path to node to stat
+     * @param string $format    print statistics in given format
+     * @param bool   $hash      print only hash
+     * @param bool   $size      print only size
+     * @param bool   $withLocal compute the amount of the dag that is local, and if possible the total size
      *
      * @return Command
      */
-    public function stat(string $arg, string $format = null, bool $hash = false, bool $size = false): Command
+    public function stat(string $arg, string $format = null, bool $hash = false, bool $size = false, bool $withLocal = false): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }
@@ -150,16 +169,19 @@ final class Files implements Api
      *
      * @Endpoint(name="files:write")
      *
-     * @param string $arg      path to write to
-     * @param string $file     data to write
-     * @param int    $offset   byte offset to begin writing at
-     * @param bool   $create   create the file if it does not exist
-     * @param bool   $truncate truncate the file to size zero before writing
-     * @param int    $count    maximum number of bytes to read
+     * @param string $arg        path to write to
+     * @param string $file       data to write
+     * @param int    $offset     byte offset to begin writing at
+     * @param bool   $create     create the file if it does not exist
+     * @param bool   $truncate   truncate the file to size zero before writing
+     * @param int    $count      maximum number of bytes to read
+     * @param bool   $rawLeaves  use raw blocks for newly created leaf nodes
+     * @param int    $cidVersion cid version to use
+     * @param string $hash       hash function to use
      *
      * @return Command
      */
-    public function write(string $arg, string $file, int $offset = 0, bool $create = false, bool $truncate = false, int $count = 0): Command
+    public function write(string $arg, string $file, int $offset = 0, bool $create = false, bool $truncate = false, int $count = 0, bool $rawLeaves = false, int $cidVersion = 0, string $hash = null): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }

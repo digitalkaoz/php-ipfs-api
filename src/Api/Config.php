@@ -36,6 +36,20 @@ final class Config implements Api
     }
 
     /**
+     * Apply profile to config.
+     *
+     * @Endpoint(name="config:profile:apply")
+     *
+     * @param string $arg the profile to apply to the config
+     *
+     * @return Command
+     */
+    public function profileApply(string $arg): Command
+    {
+        return new Command(__METHOD__, get_defined_vars());
+    }
+
+    /**
      * Replace the config with .
      *
      * @Endpoint(name="config:replace")

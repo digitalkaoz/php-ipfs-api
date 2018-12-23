@@ -30,7 +30,7 @@ class ApiBuilder
         $this->generator = $generator;
     }
 
-    public function build($url = 'https://ipfs.io/docs/api/', $prefix = '#api-v0')
+    public function build($url = 'https://docs.ipfs.io/reference/api/http/', $prefix = '#api-v0')
     {
         //parse
         $config = $this->parser->build($url, $prefix);

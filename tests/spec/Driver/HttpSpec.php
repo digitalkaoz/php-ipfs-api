@@ -47,8 +47,8 @@ class HttpSpec extends ObjectBehavior
     public function it_creates_a_http_uri_from_the_command_and_calls_the_rest_api(HttpAsyncClient $client, Promise $promise)
     {
         $client->sendAsyncRequest(Argument::that(function (RequestInterface $request) {
-            return $request->getUri()->getQuery() === 'bar=bar&bazz=1&lol=10' &&
-                $request->getUri()->getPath() === '/api/v0/test/foo'
+            return 'bar=bar&bazz=1&lol=10' === $request->getUri()->getQuery() &&
+                '/api/v0/test/foo' === $request->getUri()->getPath()
             ;
         }))->willReturn($promise);
 
@@ -63,8 +63,8 @@ class HttpSpec extends ObjectBehavior
         $client->sendAsyncRequest(Argument::that(function (RequestInterface $request) {
             $body = $request->getBody()->getContents();
 
-            return $request->getUri()->getQuery() === 'bazz=1&lol=10' &&
-                $request->getUri()->getPath() === '/api/v0/test/foo' &&
+            return 'bazz=1&lol=10' === $request->getUri()->getQuery() &&
+                '/api/v0/test/foo' === $request->getUri()->getPath() &&
                 false !== strpos($request->getHeaders()['Content-Type'][0], 'multipart/form-data; boundary=') &&
                 false !== strpos($body, 'Content-Type: application/octet-stream') &&
                 false !== strpos($body, 'Content-Disposition: form-data; name="bar"; filename="HttpSpec.php"')

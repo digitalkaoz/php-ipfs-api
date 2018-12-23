@@ -30,7 +30,7 @@ class Param
 
     public function getDefault()
     {
-        return $this->default === __CLASS__ ? null : $this->default;
+        return __CLASS__ === $this->default ? null : $this->default;
     }
 
     public function getName(): string
@@ -45,6 +45,6 @@ class Param
 
     public function hasDefault(): bool
     {
-        return $this->default !== __CLASS__;
+        return __CLASS__ !== $this->default;
     }
 }

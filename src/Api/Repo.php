@@ -40,12 +40,12 @@ final class Repo implements Api
      *
      * @Endpoint(name="repo:gc")
      *
-     * @param bool $quiet        write minimal output
      * @param bool $streamErrors stream errors
+     * @param bool $quiet        write minimal output
      *
      * @return Command
      */
-    public function gc(bool $quiet = false, bool $streamErrors = false): Command
+    public function gc(bool $streamErrors = false, bool $quiet = false): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }

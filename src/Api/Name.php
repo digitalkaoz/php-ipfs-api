@@ -32,7 +32,7 @@ final class Name implements Api
      * @param bool   $resolve  resolve given path before publishing
      * @param string $lifetime time duration that the record will be valid for
      * @param string $ttl      time duration this record should be cached for (caution: experimental)
-     * @param string $key      name of the key to be used, as listed by ‘ipfs key list’
+     * @param string $key      name of the key to be used or a valid PeerID, as listed by ‘ipfs key list -l’
      *
      * @return Command
      */
@@ -42,17 +42,57 @@ final class Name implements Api
     }
 
     /**
+     * Cancel a name subscription.
+     *
+     * @Endpoint(name="name:pubsub:cancel")
+     *
+     * @param string $arg name to cancel the subscription for
+     *
+     * @return Command
+     */
+    public function pubsubCancel(string $arg): Command
+    {
+        return new Command(__METHOD__, get_defined_vars());
+    }
+
+    /**
+     * Query the state of IPNS pubsub.
+     *
+     * @Endpoint(name="name:pubsub:state")
+     *
+     * @return Command
+     */
+    public function pubsubState(): Command
+    {
+        return new Command(__METHOD__, get_defined_vars());
+    }
+
+    /**
+     * Show current name subscriptions.
+     *
+     * @Endpoint(name="name:pubsub:subs")
+     *
+     * @return Command
+     */
+    public function pubsubSubs(): Command
+    {
+        return new Command(__METHOD__, get_defined_vars());
+    }
+
+    /**
      * Resolve IPNS names.
      *
      * @Endpoint(name="name:resolve")
      *
-     * @param string $arg       the IPNS name to resolve
-     * @param bool   $recursive resolve until the result is not an IPNS name
-     * @param bool   $nocache   do not use cached entries
+     * @param string $arg            the IPNS name to resolve
+     * @param bool   $recursive      resolve until the result is not an IPNS name
+     * @param bool   $nocache        do not use cached entries
+     * @param uint   $dhtRecordCount number of records to request for DHT resolution
+     * @param string $dhtTimeout     max time to collect values during DHT resolution eg “30s”
      *
      * @return Command
      */
-    public function resolve(string $arg = null, bool $recursive = false, bool $nocache = false): Command
+    public function resolve(string $arg = null, bool $recursive = false, bool $nocache = false, uint $dhtRecordCount = null, string $dhtTimeout = null): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }

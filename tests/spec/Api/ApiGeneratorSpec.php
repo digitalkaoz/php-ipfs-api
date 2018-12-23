@@ -15,7 +15,6 @@ use IPFS\Api\ApiGenerator;
 use PhpParser\BuilderFactory;
 use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Prophecy\Exception\Prediction\FailedPredictionException;
 
 class ApiGeneratorSpec extends ObjectBehavior

@@ -50,20 +50,6 @@ final class Diag implements Api
     }
 
     /**
-     * Generate a network diagnostics report.
-     *
-     * @Endpoint(name="diag:net")
-     *
-     * @param string $vis output format
-     *
-     * @return Command
-     */
-    public function net(string $vis = 'text'): Command
-    {
-        return new Command(__METHOD__, get_defined_vars());
-    }
-
-    /**
      * Print system diagnostic information.
      *
      * @Endpoint(name="diag:sys")

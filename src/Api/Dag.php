@@ -45,10 +45,26 @@ final class Dag implements Api
      * @param string $file     the object to put Required:
      * @param string $format   format that the object will be added as
      * @param string $inputEnc format that the input object will be
+     * @param bool   $pin      pin this object when adding
+     * @param string $hash     hash function to use
      *
      * @return Command
      */
-    public function put(string $file, string $format = 'cbor', string $inputEnc = 'json'): Command
+    public function put(string $file, string $format = 'cbor', string $inputEnc = 'json', bool $pin = false, string $hash = null): Command
+    {
+        return new Command(__METHOD__, get_defined_vars());
+    }
+
+    /**
+     * Resolve ipld block.
+     *
+     * @Endpoint(name="dag:resolve")
+     *
+     * @param string $arg the path to resolve Required:
+     *
+     * @return Command
+     */
+    public function resolve(string $arg): Command
     {
         return new Command(__METHOD__, get_defined_vars());
     }

@@ -24,6 +24,18 @@ use IPFS\Command\Command;
 final class Swarm implements Api
 {
     /**
+     * List interface listening addresses.
+     *
+     * @Endpoint(name="swarm:addrs:listen")
+     *
+     * @return Command
+     */
+    public function addrsListen(): Command
+    {
+        return new Command(__METHOD__, get_defined_vars());
+    }
+
+    /**
      * List local addresses.
      *
      * @Endpoint(name="swarm:addrs:local")
