@@ -36,4 +36,18 @@ class CommandSpec extends ObjectBehavior
     {
         $this->getAction()->shouldBe('command:spec:foo:bar:bazz');
     }
+
+    public function it_will_revert_reserved_keywords_workaround()
+    {
+        $this->beConstructedWith('cobject' . '::fooBarBazz');
+
+        $this->getAction()->shouldBe('object:foo:bar:bazz');
+    }
+
+    public function it_will_strip_basic_commands()
+    {
+        $this->beConstructedWith('basics' . '::fooBarBazz');
+
+        $this->getAction()->shouldBe('foo:bar:bazz');
+    }
 }

@@ -62,7 +62,7 @@ class Cli implements Driver
     {
         return array_merge(
             [$this->binary],
-            explode(':', str_replace('basics:', '', $command->getAction())),
+            explode(':', $command->getAction()),
             $this->parseParameters($command)
         );
     }

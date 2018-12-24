@@ -79,7 +79,7 @@ $driver = $container[IPFS\Driver\Cli::class];
 //$driver = $container[IPFS\Driver\Http::class];
 $client = new IPFS\Client($driver);
 
-$reponse = $client->execute((new \IPFS\Api\Basics())->version());
+$response = $client->execute((new \IPFS\Api\Basics())->version());
 
 var_dump($response);
 ```

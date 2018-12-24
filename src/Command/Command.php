@@ -37,7 +37,13 @@ class Command
         $parts = explode('\\', $this->method);
         $shortName = array_pop($parts);
 
-        return CaseFormatter::camelToColon(str_replace('::', ':', $shortName));
+        $name = CaseFormatter::camelToColon(str_replace('::', ':', $shortName));
+
+        // correct some naming workaround due to reserved keywords
+        $name = str_replace('basics:', '', $name);
+        $name = str_replace('cobject:', 'object:', $name);
+
+        return $name;
     }
 
     public function getArguments(): array
